@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "games": {
+      ".read": "true",
+      ".write": "auth != null"
+    },
+    "players": {
+      // /players is readable by the world
+      ".read": "true",
+
+      "$uid": {
+        ".write": "auth.uid === $uid"
+      }
+    }
+  }
+}

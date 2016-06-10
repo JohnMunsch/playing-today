@@ -1,0 +1,35 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+body {
+   padding-top: 50px;
+   padding-bottom: 20px;
+}
+
+.navbar-brand {
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 25px;
+}
+
+players td.inOut {
+  width: 150px;
+}
+
+players .table tbody tr td.name {
+  vertical-align: middle;
+}
+
+games .table tbody tr td.name {
+  vertical-align: middle;
+}
+
+games .numPlayers text {
+  color: black;
+  font-size: 8px;
+}
