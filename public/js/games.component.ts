@@ -11,10 +11,10 @@ angular.module('Playing').component('games', {
           <th>Number of Players</th>
         </tr>
       </thead>
-      <tr ng-repeat="game in $ctrl.games">
+      <tr ng-repeat="game in $ctrl.games | orderBy:'name'">
         <td class="name">{{ game.name }}</td>
         <td>
-          <recommended-players num-players="game.numberOfPlayers" 
+          <recommended-players num-players="game.numberOfPlayers"
             highlight-count="$ctrl.highlightCount"></recommended-players>
         </td>
       </tr>

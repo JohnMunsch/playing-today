@@ -6,11 +6,33 @@ body {
    padding-bottom: 20px;
 }
 
+.invisibleUFO {
+  color: #00A0B0;
+}
+
+.caribicBrown {
+  color: #6A4A3C;
+}
+
+.caribicRed {
+  color: #CC333F;
+}
+
+.caribicSun {
+  color: #EB6841;
+}
+
+.caribicDaylight {
+  color: #EDC951;
+}
+
 .navbar-brand {
   width: 180px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  font-family: 'Lilita One', cursive;
 }
 
 .logo {

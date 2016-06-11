@@ -58,9 +58,6 @@ angular.module('Playing').component('main', {
     <navbar user="$ctrl.user" sign-out="$ctrl.signOut()"></navbar>
 
     <div class="container">
-      <div class="col-md-12">
-        <h3>Playing Today: <span class="label label-default">{{ $ctrl.numPlaying() }}</span></h3>
-      </div>
       <div class="col-md-4">
         <players active="$ctrl.user" players="$ctrl.state.players"
           playing="$ctrl.playing(uid, name, playingToday)"></players>
