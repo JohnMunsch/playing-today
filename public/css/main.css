@@ -55,3 +55,7 @@ games .numPlayers text {
   color: black;
   font-size: 8px;
 }
+
+tabs .gamesByPlayerCount {
+  margin-top: 20px;
+}

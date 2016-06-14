@@ -34,11 +34,11 @@ angular.module('Playing').component('main', {
             var player = _this.state.players[uid];
             player.playingToday = playingToday;
         };
-        this.numPlaying = function () {
+        this.numPlayers = function () {
             return _.reduce(_this.state.players, function (sum, player) {
                 return player.playingToday ? sum + 1 : sum;
             }, 0);
         };
     },
-    template: "\n    <navbar user=\"$ctrl.user\" sign-out=\"$ctrl.signOut()\"></navbar>\n\n    <div class=\"container\">\n      <div class=\"col-md-4\">\n        <players active=\"$ctrl.user\" players=\"$ctrl.state.players\"\n          playing=\"$ctrl.playing(uid, name, playingToday)\"></players>\n      </div>\n      <div class=\"col-md-8\">\n        <games games=\"$ctrl.games\" highlight-count=\"$ctrl.numPlaying()\"></games>\n      </div>\n\n      <hr>\n\n      <footer>\n        <p>&copy; John Munsch 2016</p>\n      </footer>\n    </div> <!-- /container -->"
+    template: "\n    <navbar user=\"$ctrl.user\" sign-out=\"$ctrl.signOut()\"></navbar>\n\n    <div class=\"container\">\n      <div class=\"col-md-4\">\n        <players active=\"$ctrl.user\" players=\"$ctrl.state.players\"\n          playing=\"$ctrl.playing(uid, name, playingToday)\"></players>\n      </div>\n      <div class=\"col-md-8\">\n        <tabs games=\"$ctrl.games\" num-players=\"$ctrl.numPlayers()\"></tabs>\n      </div>\n\n      <hr>\n\n      <footer>\n        <p>&copy; John Munsch 2016</p>\n      </footer>\n    </div> <!-- /container -->"
 });

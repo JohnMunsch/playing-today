@@ -48,10 +48,10 @@ angular.module('Playing').component('main', {
       player.playingToday = playingToday;
     };
 
-    this.numPlaying = () => {
+    this.numPlayers = () => {
       return _.reduce(this.state.players, (sum, player) => {
         return player.playingToday ? sum + 1 : sum;
-      }, 0)
+      }, 0);
     };
   },
   template: `
@@ -63,7 +63,7 @@ angular.module('Playing').component('main', {
           playing="$ctrl.playing(uid, name, playingToday)"></players>
       </div>
       <div class="col-md-8">
-        <games games="$ctrl.games" highlight-count="$ctrl.numPlaying()"></games>
+        <tabs games="$ctrl.games" num-players="$ctrl.numPlayers()"></tabs>
       </div>
 
       <hr>
