@@ -58,12 +58,14 @@ angular.module('Playing').component('main', {
     <navbar user="$ctrl.user" sign-out="$ctrl.signOut()"></navbar>
 
     <div class="container">
-      <div class="col-md-4">
-        <players active="$ctrl.user" players="$ctrl.state.players"
-          playing="$ctrl.playing(uid, name, playingToday)"></players>
-      </div>
-      <div class="col-md-8">
-        <tabs games="$ctrl.games" num-players="$ctrl.numPlayers()"></tabs>
+      <div class="row">
+        <div class="col-md-4">
+          <players active="$ctrl.user" players="$ctrl.state.players"
+            playing="$ctrl.playing(uid, name, playingToday)"></players>
+        </div>
+        <div class="col-md-8">
+          <tabs games="$ctrl.games" num-players="$ctrl.numPlayers()"></tabs>
+        </div>
       </div>
 
       <hr>

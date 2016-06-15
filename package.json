@@ -1,0 +1,24 @@
+{
+  "name": "playing-today",
+  "description": "",
+  "version": "1.0.0",
+  "main": "resetPlayers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnMunsch/playing-today.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnMunsch/playing-today/issues"
+  },
+  "homepage": "https://github.com/JohnMunsch/playing-today#readme",
+  "devDependencies": {
+    "firebase": "^3.0.5",
+    "lodash": "^4.13.1"
+  }
+}
