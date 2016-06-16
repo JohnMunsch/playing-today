@@ -9,7 +9,7 @@ firebase.initializeApp({
 
 let playersRef = firebase.database().ref('players');
 
-playersRef.on('value', (snapshot) => {
+playersRef.once('value', (snapshot) => {
   let players = snapshot.val();
 
   let playersUpdate = _.fromPairs(_.map(players, (player, uid) => {

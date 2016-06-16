@@ -17,12 +17,12 @@ angular.module('Playing').component('tabs', {
     <div class="gamesByPlayerCount">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
+        <li role="presentation" class="active" ng-if="$ctrl.numPlayers > 0">
           <a href="#tab-1" aria-controls="home" role="tab" data-toggle="tab">
             Games for {{ $ctrl.numPlayers }} Players
           </a>
         </li>
-        <li role="presentation">
+        <li role="presentation" ng-class="{ active: $ctrl.numPlayers === 0 }">
           <a href="#tab-2" aria-controls="profile" role="tab" data-toggle="tab">
             All Games
           </a>
