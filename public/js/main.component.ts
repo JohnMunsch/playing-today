@@ -6,8 +6,9 @@ angular.module('Playing').component('main', {
   bindings: {
     $router: '<'
   },
-  controller: function ($scope, StateService, GamesService) {
+  controller: function ($scope, StateService) {
     this.$routerOnActivate = this.$routeOnReuse = () => {
+      // TODO: Move this to the state service.
       // Wire up to the Firebase authentication notifications.
       firebase.auth().onAuthStateChanged((user) => {
         $scope.$apply(() => {
@@ -23,35 +24,14 @@ angular.module('Playing').component('main', {
     }
 
     // Inject the player and game data once it's loaded.
-    this.state = StateService;
-
-    GamesService.then(games => {
-      this.games = games;
-    });
+    this.state = StateService.state;
 
     this.signOut = () => {
-      firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-      }, function(error) {
-        // An error happened.
-      });
+      StateService.signOut();
     };
 
     this.playing = (uid, name, playingToday) => {
-      firebase.database().ref(`players/${uid}`).set({
-        name,
-        playingToday
-      });
-
-      // At the same time we're saving the value to the server...
-      let player = this.state.players[uid];
-      player.playingToday = playingToday;
-    };
-
-    this.numPlayers = () => {
-      return _.reduce(this.state.players, (sum, player) => {
-        return player.playingToday ? sum + 1 : sum;
-      }, 0);
+      StateService.playingToday(uid, name, playingToday);
     };
   },
   template: `
@@ -60,11 +40,11 @@ angular.module('Playing').component('main', {
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <players active="$ctrl.user" players="$ctrl.state.players"
+          <players active="$ctrl.user" state="$ctrl.state"
             playing="$ctrl.playing(uid, name, playingToday)"></players>
         </div>
         <div class="col-md-8">
-          <tabs games="$ctrl.games" num-players="$ctrl.numPlayers()"></tabs>
+          <tabs games="$ctrl.state.games" num-players="$ctrl.state.playersIn"></tabs>
         </div>
       </div>
 

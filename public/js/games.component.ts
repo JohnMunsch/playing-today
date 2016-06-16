@@ -4,14 +4,17 @@ angular.module('Playing').component('games', {
     numPlayers: '<'
   },
   controller: function () {
-    this.onlyCompatible = (value, index, array) => {
-      if (this.numPlayers) {
-        let count = _.find(value.numberOfPlayers, { players: this.numPlayers });
+    this.onlyCompatible = () => {
+      return _.filter(this.games, (game) => {
+        if (this.numPlayers) {
+          console.log(game);
+          let count = _.find(game.numberOfPlayers, { players: this.numPlayers });
 
-        return count ? true : false;
-      } else {
-        return true;
-      }
+          return count ? true : false;
+        } else {
+          return true;
+        }
+      });
     };
   },
   template: `
@@ -22,7 +25,7 @@ angular.module('Playing').component('games', {
           <th>Number of Players</th>
         </tr>
       </thead>
-      <tr ng-repeat="game in $ctrl.games | filter:$ctrl.onlyCompatible | orderBy:'name'">
+      <tr ng-repeat="game in $ctrl.onlyCompatible() | orderBy:'name'">
         <td class="name">{{ game.name }}</td>
         <td>
           <recommended-players num-players="game.numberOfPlayers"></recommended-players>

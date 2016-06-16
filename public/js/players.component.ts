@@ -1,18 +1,11 @@
 angular.module('Playing').component('players', {
   bindings: {
     active: '<',
-    players: '<',
+    state: '<',
     playing: '&'
   },
-  controller: function () {
-    this.count = (playing) => {
-      return _.reduce(this.players, (sum, player) => {
-        return sum + ((player.playingToday === playing) ? 1 : 0);
-      }, 0);
-    };
-  },
   template: `
-    <h2>In <span class="label label-default">{{ $ctrl.count(true) }}</span></h2>
+    <h2>In <span class="label label-default">{{ $ctrl.state.playersIn }}</span></h2>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -20,7 +13,7 @@ angular.module('Playing').component('players', {
           <th class="inOut">In/Out</th>
         </tr>
       </thead>
-      <tr ng-repeat="(key, value) in $ctrl.players" ng-if="value.playingToday">
+      <tr ng-repeat="(key, value) in $ctrl.state.players" ng-if="value.playingToday">
         <td class="name">{{ value.name }}</td>
         <td class="inOut">
           <div class="btn-group btn-group-xs" role="group" aria-label="..." ng-if="$ctrl.active.uid === key">
@@ -38,7 +31,7 @@ angular.module('Playing').component('players', {
       </tr>
     </table>
 
-    <h2>Out <span class="label label-default">{{ $ctrl.count(false) }}</span></h2>
+    <h2>Out <span class="label label-default">{{ $ctrl.state.playersOut }}</span></h2>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -46,7 +39,7 @@ angular.module('Playing').component('players', {
           <th class="inOut">In/Out</th>
         </tr>
       </thead>
-      <tr ng-repeat="(key, value) in $ctrl.players" ng-if="!value.playingToday">
+      <tr ng-repeat="(key, value) in $ctrl.state.players" ng-if="!value.playingToday">
         <td class="name">{{ value.name }}</td>
         <td class="inOut">
           <div class="btn-group btn-group-xs" role="group" aria-label="..." ng-if="$ctrl.active.uid === key">

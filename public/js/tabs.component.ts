@@ -5,6 +5,8 @@ angular.module('Playing').component('tabs', {
   },
   controller: function () {
     this.$onInit = () => {
+      // This is to avoid clicks changing the route. It can be replaced with
+      // ng-click events tied to the tabs instead.
       $('tabs a[data-toggle="tab"]').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -26,7 +28,7 @@ angular.module('Playing').component('tabs', {
           </a>
         </li>
       </ul>
-    
+
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="tab-1">
