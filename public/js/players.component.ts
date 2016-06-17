@@ -5,7 +5,7 @@ angular.module('Playing').component('players', {
     playing: '&'
   },
   template: `
-    <h2>In <span class="label label-default">{{ $ctrl.state.playersIn }}</span></h2>
+    <h2>In <span class="label label-default">{{ $ctrl.state.counts.playersIn }}</span></h2>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -31,7 +31,7 @@ angular.module('Playing').component('players', {
       </tr>
     </table>
 
-    <h2>Out <span class="label label-default">{{ $ctrl.state.playersOut }}</span></h2>
+    <h2>Out <span class="label label-default">{{ $ctrl.state.counts.playersOut }}</span></h2>
     <table class="table table-striped">
       <thead>
         <tr>

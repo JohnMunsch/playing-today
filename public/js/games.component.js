@@ -8,7 +8,6 @@ angular.module('Playing').component('games', {
         this.onlyCompatible = function () {
             return _.filter(_this.games, function (game) {
                 if (_this.numPlayers) {
-                    console.log(game);
                     var count = _.find(game.numberOfPlayers, { players: _this.numPlayers });
                     return count ? true : false;
                 }

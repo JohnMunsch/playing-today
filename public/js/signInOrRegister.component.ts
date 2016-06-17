@@ -4,44 +4,27 @@ angular.module('Playing').component('signInOrRegister', {
   bindings: {
     $router: '<'
   },
-  controller: function ($scope) {
-    this.$routerOnActivate = this.$routeOnReuse = () => {
-      // Wire up to the Firebase authentication notifications.
-      firebase.auth().onAuthStateChanged((user) => {
-        $scope.$apply(() => {
-          if (user) {
-            this.$router.navigate(['Main']);
-          } else {
-            this.user = null;
-          }
-        });
+  controller: function ($scope, StateService) {
+    this.state = StateService.store.getState();
+
+    let unsubscribe = StateService.store.subscribe(() => {
+      $scope.$applyAsync(() => {
+        this.state = StateService.store.getState();
+        console.log('signInOrRegister', this.state);
+
+        if (this.state.user !== null) {
+          this.$router.navigate(['Main']);
+        }
       });
-    };
+    });
 
     this.toggleForms = () => {
       $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     };
 
-    this.register = (email, password) => {
-      firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
-        firebase.database().ref(`players/${user.uid}`).set({
-          name: email,
-          playingToday: false
-        });
-      });
-    };
+    this.register = StateService.register;
 
-    this.signIn = (email, password) => {
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(
-        (error) => {
-          $scope.$apply(() => {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-          });
-        });
-    };
+    this.signIn = StateService.signIn;
   },
   template: `
     <div id="signIn">
