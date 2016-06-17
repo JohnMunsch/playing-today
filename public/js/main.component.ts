@@ -11,7 +11,6 @@ angular.module('Playing').component('main', {
     let unsubscribe = StateService.store.subscribe(() => {
       $scope.$applyAsync(() => {
         this.state = StateService.store.getState();
-        console.log('main', this.state);
 
         if (this.state.user === null) {
           this.$router.navigate(['SignInOrRegister']);

@@ -8,7 +8,6 @@ angular.module('Playing').component('signInOrRegister', {
         var unsubscribe = StateService.store.subscribe(function () {
             $scope.$applyAsync(function () {
                 _this.state = StateService.store.getState();
-                console.log('signInOrRegister', _this.state);
                 if (_this.state.user !== null) {
                     _this.$router.navigate(['Main']);
                 }
