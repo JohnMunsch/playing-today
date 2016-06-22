@@ -11,6 +11,11 @@ angular.module('Playing', ['ngComponentRouter']).component('app', {
             name: 'Main',
             component: 'main',
             useAsDefault: true
+        },
+        {
+            path: '/status/:status',
+            name: 'SetStatus',
+            component: 'main'
         }
     ]
 }).value('$routerRootComponent', 'app');
