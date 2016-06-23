@@ -75,7 +75,7 @@ angular.module('Playing').factory('StateService', function ($rootScope, $q) {
   };
 
   this.playingToday = (uid, name, playingToday) => {
-    firebase.database().ref(`players/${uid}`).set({
+    return firebase.database().ref(`players/${uid}`).set({
       name,
       playingToday
     });

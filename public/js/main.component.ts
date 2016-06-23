@@ -13,11 +13,12 @@ angular.module('Playing').component('main', {
         this.state = StateService.store.getState();
 
         if (this.state.user === null) {
-          this.$router.navigate(['SignInOrRegister']);
+          this.$router.navigate([ 'SignInOrRegister' ]);
         } else if (this.status) {
-          StateService.playingToday(this.state.user.uid, this.state.user.email, this.status === 'in' ? true : false);
-
-          delete this.status;
+          StateService.playingToday(this.state.user.uid, this.state.user.email,
+            this.status === 'in' ? true : false).then(() => {
+              this.$router.navigate([ 'Main' ]);
+            });
         }
       });
     });

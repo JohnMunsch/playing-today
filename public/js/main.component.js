@@ -12,8 +12,9 @@ angular.module('Playing').component('main', {
                     _this.$router.navigate(['SignInOrRegister']);
                 }
                 else if (_this.status) {
-                    StateService.playingToday(_this.state.user.uid, _this.state.user.email, _this.status === 'in' ? true : false);
-                    delete _this.status;
+                    StateService.playingToday(_this.state.user.uid, _this.state.user.email, _this.status === 'in' ? true : false).then(function () {
+                        _this.$router.navigate(['Main']);
+                    });
                 }
             });
         });
