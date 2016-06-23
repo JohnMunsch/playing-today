@@ -14,6 +14,10 @@ angular.module('Playing').component('main', {
 
         if (this.state.user === null) {
           this.$router.navigate(['SignInOrRegister']);
+        } else if (this.status) {
+          StateService.playingToday(this.state.user.uid, this.state.user.email, this.status === 'in' ? true : false);
+
+          delete this.status;
         }
       });
     });
@@ -21,6 +25,11 @@ angular.module('Playing').component('main', {
     this.signOut = StateService.signOut;
 
     this.playing = StateService.playingToday;
+
+    this.$routerOnActivate = (next, previous) => {
+      // Get the hero identified by the route parameter
+      this.status = next.params.status;
+    };
   },
   template: `
     <navbar user="$ctrl.state.user" sign-out="$ctrl.signOut()"></navbar>
