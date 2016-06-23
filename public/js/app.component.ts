@@ -11,6 +11,11 @@ angular.module('Playing', [ 'ngComponentRouter' ]).component('app', {
       name: 'Main',
       component: 'main',
       useAsDefault: true
+    },
+    {
+      path: '/game/:id',
+      name: 'Game',
+      component: 'game'
     }
   ]
 }).value('$routerRootComponent', 'app');

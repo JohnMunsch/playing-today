@@ -4,7 +4,7 @@ declare var Redux;
 declare var reduxLogger;
 declare var firebase;
 
-angular.module('Playing').factory('StateService', function ($rootScope) {
+angular.module('Playing').factory('StateService', function ($rootScope, $q) {
   const LOAD_USER = 'LOAD_USER';
   const LOAD_GAMES = 'LOAD_GAMES';
   const LOAD_PLAYERS = 'LOAD_PLAYERS';
@@ -79,6 +79,10 @@ angular.module('Playing').factory('StateService', function ($rootScope) {
       name,
       playingToday
     });
+  };
+  
+  this.getGame = (id) => {
+    return $q.when(this.store.getState().games[`${id}`]);
   };
 
   // The following are live all the time and updating the state structure as the

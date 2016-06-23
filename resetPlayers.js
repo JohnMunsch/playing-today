@@ -16,5 +16,7 @@ playersRef.once('value', (snapshot) => {
     return [ `${uid}/playingToday`, false ];
   }));
 
-  playersRef.update(playersUpdate);
+  playersRef.update(playersUpdate).then(() => {
+    process.exit();
+  });
 });

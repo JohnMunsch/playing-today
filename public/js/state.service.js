@@ -1,4 +1,4 @@
-angular.module('Playing').factory('StateService', function ($rootScope) {
+angular.module('Playing').factory('StateService', function ($rootScope, $q) {
     var _this = this;
     var LOAD_USER = 'LOAD_USER';
     var LOAD_GAMES = 'LOAD_GAMES';
@@ -52,6 +52,9 @@ angular.module('Playing').factory('StateService', function ($rootScope) {
             name: name,
             playingToday: playingToday
         });
+    };
+    this.getGame = function (id) {
+        return $q.when(_this.store.getState().games[("" + id)]);
     };
     firebase.database().ref("players").on('value', function (snapshot) {
         var players = snapshot.val();
