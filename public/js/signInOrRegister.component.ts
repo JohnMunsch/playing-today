@@ -7,7 +7,7 @@ angular.module('Playing').component('signInOrRegister', {
   controller: function ($scope, StateService) {
     this.state = StateService.store.getState();
 
-    let unsubscribe = StateService.store.subscribe(() => {
+    this.unsubscribe = StateService.store.subscribe(() => {
       $scope.$applyAsync(() => {
         this.state = StateService.store.getState();
 
@@ -24,6 +24,10 @@ angular.module('Playing').component('signInOrRegister', {
     this.register = StateService.register;
 
     this.signIn = StateService.signIn;
+
+    this.$onDestroy = () => {
+      this.unsubscribe();
+    };
   },
   template: `
     <div id="signIn">

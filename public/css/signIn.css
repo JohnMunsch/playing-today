@@ -122,14 +122,14 @@
 
 /* END Form */
 /* Demo Purposes */
-body #signIn {
+body {
   background: #ccc;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body:before #signIn {
+body:before {
   content: "";
   position: fixed;
   top: 0;

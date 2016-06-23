@@ -8,15 +8,17 @@ angular.module('Playing').component('main', {
     // Inject the player and game data once it's loaded.
     this.state = StateService.store.getState();
 
-    let unsubscribe = StateService.store.subscribe(() => {
+    this.unsubscribe = StateService.store.subscribe(() => {
       $scope.$applyAsync(() => {
         this.state = StateService.store.getState();
 
         if (this.state.user === null) {
           this.$router.navigate([ 'SignInOrRegister' ]);
-        } else if (this.status) {
+        } else if (this.status !== null) {
           StateService.playingToday(this.state.user.uid, this.state.user.email,
             this.status === 'in' ? true : false).then(() => {
+              this.status = null;
+
               this.$router.navigate([ 'Main' ]);
             });
         }
@@ -27,7 +29,11 @@ angular.module('Playing').component('main', {
 
     this.playing = StateService.playingToday;
 
-    this.$routerOnActivate = (next, previous) => {
+    this.$onDestroy = () => {
+      this.unsubscribe();
+    };
+
+    this.$routerOnActivate = this.$routeOnReuse = (next, previous) => {
       // Get the hero identified by the route parameter
       this.status = next.params.status;
     };

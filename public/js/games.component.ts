@@ -25,7 +25,7 @@ angular.module('Playing').component('games', {
         </tr>
       </thead>
       <tr ng-repeat="(id, game) in $ctrl.onlyCompatible() | orderBy:'name'">
-        <td class="name"><a href="#/game/{{ id }}">{{ game.name }}</a></td>
+        <td class="name">{{ game.name }}</td>
         <td>
           <recommended-players num-players="game.numberOfPlayers"></recommended-players>
         </td>

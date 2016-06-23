@@ -23,4 +23,6 @@ angular.module('Playing', [ 'ngComponentRouter' ]).component('app', {
       component: 'game'
     }
   ]
+}).config(function($locationProvider) {
+  $locationProvider.html5Mode(true);
 }).value('$routerRootComponent', 'app');

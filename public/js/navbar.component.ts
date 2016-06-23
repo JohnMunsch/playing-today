@@ -14,7 +14,7 @@ angular.module('Playing').component('navbar', {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img class="logo" src="img/meeple.svg"><div>Playing today?</div></a>
+          <a class="navbar-brand" href="/"><img class="logo" src="img/meeple.svg"><div>Playing today?</div></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form" ng-if="$ctrl.user !== null">

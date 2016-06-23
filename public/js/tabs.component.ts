@@ -4,14 +4,6 @@ angular.module('Playing').component('tabs', {
     numPlayers: '<'
   },
   controller: function () {
-    this.$onInit = () => {
-      // This is to avoid clicks changing the route. It can be replaced with
-      // ng-click events tied to the tabs instead.
-      $('tabs a[data-toggle="tab"]').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-      })
-    };
   },
   template: `
     <div class="gamesByPlayerCount">

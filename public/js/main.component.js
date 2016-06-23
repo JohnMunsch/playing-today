@@ -5,14 +5,15 @@ angular.module('Playing').component('main', {
     controller: function ($scope, StateService) {
         var _this = this;
         this.state = StateService.store.getState();
-        var unsubscribe = StateService.store.subscribe(function () {
+        this.unsubscribe = StateService.store.subscribe(function () {
             $scope.$applyAsync(function () {
                 _this.state = StateService.store.getState();
                 if (_this.state.user === null) {
                     _this.$router.navigate(['SignInOrRegister']);
                 }
-                else if (_this.status) {
+                else if (_this.status !== null) {
                     StateService.playingToday(_this.state.user.uid, _this.state.user.email, _this.status === 'in' ? true : false).then(function () {
+                        _this.status = null;
                         _this.$router.navigate(['Main']);
                     });
                 }
@@ -20,7 +21,10 @@ angular.module('Playing').component('main', {
         });
         this.signOut = StateService.signOut;
         this.playing = StateService.playingToday;
-        this.$routerOnActivate = function (next, previous) {
+        this.$onDestroy = function () {
+            _this.unsubscribe();
+        };
+        this.$routerOnActivate = this.$routeOnReuse = function (next, previous) {
             _this.status = next.params.status;
         };
     },
