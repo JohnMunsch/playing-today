@@ -13,6 +13,11 @@ angular.module('Playing', [ 'ngComponentRouter' ]).component('app', {
       useAsDefault: true
     },
     {
+      path: '/status/:status',
+      name: 'SetStatus',
+      component: 'main'
+    },
+    {
       path: '/game/:id',
       name: 'Game',
       component: 'game'
