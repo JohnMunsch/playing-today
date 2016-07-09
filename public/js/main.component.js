@@ -12,7 +12,7 @@ angular.module('Playing').component('main', {
 
         if (this.state.user === null) {
           this.$router.navigate([ 'SignInOrRegister' ]);
-        } else if (this.status !== null) {
+        } else if (!_.isNil(this.status)) {
           StateService.playingToday(this.state.user.uid, this.state.user.email,
             this.status === 'in' ? true : false).then(() => {
               this.status = null;
