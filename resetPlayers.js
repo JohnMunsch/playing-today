@@ -1,6 +1,9 @@
 'use strict';
+
 let firebase = require('firebase');
 let _ = require('lodash');
+
+require('dotenv').config();
 
 firebase.initializeApp({
   serviceAccount: 'Playing-df6b999b486a.json',
