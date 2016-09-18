@@ -1,11 +1,12 @@
 {
   "rules": {
     "games": {
+      // /games is world readable
       ".read": "true",
       ".write": "auth != null"
     },
     "players": {
-      // /players is readable by the world
+      // /players is world readable
       ".read": "true",
 
       "$uid": {
