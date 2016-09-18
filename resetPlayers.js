@@ -1,4 +1,5 @@
 'use strict';
+
 let firebase = require('firebase');
 let _ = require('lodash');
 
