@@ -1,0 +1,403 @@
+{
+  "games" : [ {
+    "name" : "Carcassonne",
+    "notes" : "Plays with six if you add the Inns & Cathedrals.",
+    "numberOfPlayers" : [ {
+      "best" : 56.4,
+      "not" : 6.1,
+      "players" : 2,
+      "recommended" : 37.6
+    }, {
+      "best" : 47.3,
+      "not" : 2.3,
+      "players" : 3,
+      "recommended" : 50.3
+    }, {
+      "best" : 31.7,
+      "not" : 8.6,
+      "players" : 4,
+      "recommended" : 59.7
+    }, {
+      "best" : 12,
+      "not" : 35.4,
+      "players" : 5,
+      "recommended" : 52.7
+    } ]
+  }, {
+    "name" : "Jamaica",
+    "numberOfPlayers" : [ {
+      "best" : 3.9,
+      "not" : 58.3,
+      "players" : 2,
+      "recommended" : 37.9
+    }, {
+      "best" : 8.2,
+      "not" : 25.8,
+      "players" : 3,
+      "recommended" : 66
+    }, {
+      "best" : 33.6,
+      "not" : 0.9,
+      "players" : 4,
+      "recommended" : 65.5
+    }, {
+      "best" : 45,
+      "not" : 0,
+      "players" : 5,
+      "recommended" : 55
+    }, {
+      "best" : 70.9,
+      "not" : 4.5,
+      "players" : 6,
+      "recommended" : 24.5
+    } ]
+  }, {
+    "name" : "Augustus",
+    "numberOfPlayers" : [ {
+      "best" : 6.7,
+      "not" : 20,
+      "players" : 2,
+      "recommended" : 73.3
+    }, {
+      "best" : 50.9,
+      "not" : 0,
+      "players" : 3,
+      "recommended" : 49.1
+    }, {
+      "best" : 67.9,
+      "not" : 0,
+      "players" : 4,
+      "recommended" : 32.1
+    }, {
+      "best" : 35.4,
+      "not" : 4.2,
+      "players" : 5,
+      "recommended" : 60.4
+    }, {
+      "best" : 23.9,
+      "not" : 15.2,
+      "players" : 6,
+      "recommended" : 60.9
+    } ]
+  }, {
+    "name" : "No Thanks!",
+    "numberOfPlayers" : [ {
+      "best" : 1,
+      "not" : 92.2,
+      "players" : 2,
+      "recommended" : 6.8
+    }, {
+      "best" : 17.5,
+      "not" : 18.9,
+      "players" : 3,
+      "recommended" : 63.6
+    }, {
+      "best" : 57.7,
+      "not" : 0,
+      "players" : 4,
+      "recommended" : 42.3
+    }, {
+      "best" : 73,
+      "not" : 0.7,
+      "players" : 5,
+      "recommended" : 26.4
+    } ]
+  }, {
+    "name" : "Rattus",
+    "numberOfPlayers" : [ {
+      "best" : 6.8,
+      "not" : 45.9,
+      "players" : 2,
+      "recommended" : 47.3
+    }, {
+      "best" : 28.6,
+      "not" : 3.9,
+      "players" : 3,
+      "recommended" : 67.5
+    }, {
+      "best" : 87.8,
+      "not" : 2.4,
+      "players" : 4,
+      "recommended" : 9.8
+    } ]
+  }, {
+    "name" : "Agricola: All Creatures Big and Small",
+    "numberOfPlayers" : [ {
+      "best" : 94,
+      "not" : 1.2,
+      "players" : 2,
+      "recommended" : 4.8
+    } ]
+  }, {
+    "name" : "Dice Town",
+    "numberOfPlayers" : [ {
+      "best" : 4.7,
+      "not" : 53.5,
+      "players" : 2,
+      "recommended" : 41.9
+    }, {
+      "best" : 20.9,
+      "not" : 16.3,
+      "players" : 3,
+      "recommended" : 62.8
+    }, {
+      "best" : 67.4,
+      "not" : 2.2,
+      "players" : 4,
+      "recommended" : 30.4
+    }, {
+      "best" : 48.9,
+      "not" : 6.4,
+      "players" : 5,
+      "recommended" : 44.7
+    } ]
+  }, {
+    "name" : "Saboteur",
+    "numberOfPlayers" : [ {
+      "best" : 1.4,
+      "not" : 83.7,
+      "players" : 3,
+      "recommended" : 15
+    }, {
+      "best" : 4.3,
+      "not" : 58.4,
+      "players" : 4,
+      "recommended" : 37.3
+    }, {
+      "best" : 21.5,
+      "not" : 8.6,
+      "players" : 5,
+      "recommended" : 69.9
+    }, {
+      "best" : 37.3,
+      "not" : 6.5,
+      "players" : 6,
+      "recommended" : 56.2
+    }, {
+      "best" : 64.7,
+      "not" : 1.2,
+      "players" : 7,
+      "recommended" : 34.1
+    }, {
+      "best" : 58.8,
+      "not" : 4.1,
+      "players" : 8,
+      "recommended" : 37.2
+    }, {
+      "best" : 31.6,
+      "not" : 9.6,
+      "players" : 9,
+      "recommended" : 58.8
+    }, {
+      "best" : 24.8,
+      "not" : 14.3,
+      "players" : 10,
+      "recommended" : 60.9
+    } ]
+  }, {
+    "name" : "Bang! The Dice Game",
+    "numberOfPlayers" : [ {
+      "best" : 0,
+      "not" : 87.1,
+      "players" : 3,
+      "recommended" : 12.9
+    }, {
+      "best" : 3.5,
+      "not" : 55.8,
+      "players" : 4,
+      "recommended" : 40.7
+    }, {
+      "best" : 32.6,
+      "not" : 1.1,
+      "players" : 5,
+      "recommended" : 66.3
+    }, {
+      "best" : 68.8,
+      "not" : 0,
+      "players" : 6,
+      "recommended" : 31.3
+    }, {
+      "best" : 64.8,
+      "not" : 1.1,
+      "players" : 7,
+      "recommended" : 34.1
+    }, {
+      "best" : 39.5,
+      "not" : 5.8,
+      "players" : 8,
+      "recommended" : 54.7
+    } ]
+  }, {
+    "name" : "Cacao",
+    "numberOfPlayers" : [ {
+      "best" : 19.4,
+      "not" : 6.5,
+      "players" : 2,
+      "recommended" : 74.2
+    }, {
+      "best" : 69.7,
+      "not" : 3,
+      "players" : 3,
+      "recommended" : 27.3
+    }, {
+      "best" : 34.3,
+      "not" : 5.7,
+      "players" : 4,
+      "recommended" : 60
+    } ]
+  }, {
+    "name" : "Dominion",
+    "numberOfPlayers" : [ {
+      "best" : 38.4,
+      "not" : 6,
+      "players" : 2,
+      "recommended" : 55.6
+    }, {
+      "best" : 56.7,
+      "not" : 1,
+      "players" : 3,
+      "recommended" : 42.3
+    }, {
+      "best" : 39.6,
+      "not" : 6.9,
+      "players" : 4,
+      "recommended" : 53.5
+    } ]
+  }, {
+    "name" : "For Sale",
+    "numberOfPlayers" : [ {
+      "best" : 7.7,
+      "not" : 19.6,
+      "players" : 3,
+      "recommended" : 72.6
+    }, {
+      "best" : 41.2,
+      "not" : 0,
+      "players" : 4,
+      "recommended" : 58.8
+    }, {
+      "best" : 69.4,
+      "not" : 1.2,
+      "players" : 5,
+      "recommended" : 29.5
+    }, {
+      "best" : 32.5,
+      "not" : 8.8,
+      "players" : 6,
+      "recommended" : 58.8
+    } ]
+  }, {
+    "name" : "High Society",
+    "numberOfPlayers" : [ {
+      "best" : 20,
+      "not" : 21.5,
+      "players" : 3,
+      "recommended" : 58.5
+    }, {
+      "best" : 63.6,
+      "not" : 0,
+      "players" : 4,
+      "recommended" : 36.4
+    }, {
+      "best" : 56.3,
+      "not" : 3.1,
+      "players" : 5,
+      "recommended" : 40.6
+    } ]
+  }, {
+    "name" : "Sushi Go",
+    "numberOfPlayers" : [ {
+      "best" : 5.7,
+      "not" : 39.8,
+      "players" : 2,
+      "recommended" : 54.5
+    }, {
+      "best" : 44.9,
+      "not" : 2.2,
+      "players" : 3,
+      "recommended" : 52.8
+    }, {
+      "best" : 71.1,
+      "not" : 1,
+      "players" : 4,
+      "recommended" : 27.8
+    }, {
+      "best" : 33.3,
+      "not" : 7.7,
+      "players" : 5,
+      "recommended" : 59
+    } ]
+  }, {
+    "name" : "Coup Rebellion G54",
+    "numberOfPlayers" : [ {
+      "best" : 7.1,
+      "not" : 28.6,
+      "players" : 3,
+      "recommended" : 64.3
+    }, {
+      "best" : 35.7,
+      "not" : 0,
+      "players" : 4,
+      "recommended" : 64.3
+    }, {
+      "best" : 85.7,
+      "not" : 0,
+      "players" : 5,
+      "recommended" : 14.3
+    }, {
+      "best" : 64.3,
+      "not" : 7.1,
+      "players" : 6,
+      "recommended" : 28.6
+    } ]
+  }, {
+    "name" : "Splendor",
+    "numberOfPlayers" : [ {
+      "best" : 34.5,
+      "not" : 7.8,
+      "players" : 2,
+      "recommended" : 57.8
+    }, {
+      "best" : 53.2,
+      "not" : 2,
+      "players" : 3,
+      "recommended" : 44.8
+    }, {
+      "best" : 37.5,
+      "not" : 8.2,
+      "players" : 4,
+      "recommended" : 54.3
+    } ]
+  }, {
+    "name" : "Settlers of Catan, The",
+    "numberOfPlayers" : [ {
+      "best" : 35,
+      "not" : 7.1,
+      "players" : 3,
+      "recommended" : 57.9
+    }, {
+      "best" : 75.9,
+      "not" : 2,
+      "players" : 4,
+      "recommended" : 22.1
+    } ]
+  }, {
+    "name" : "Carcassonne: The Castle",
+    "numberOfPlayers" : [ {
+      "best" : 96.5,
+      "not" : 0,
+      "players" : 2,
+      "recommended" : 3.5
+    } ]
+  } ],
+  "players" : {
+    "4ajsIxK3zJeCD39JoP1IDNGY4t82" : {
+      "name" : "james.kirk@test.com",
+      "playingToday" : false
+    },
+    "8plMXPEIgoO4CYNUHp6HZEuDQ352" : {
+      "name" : "leonard.mccoy@test.com",
+      "playingToday" : true
+    }
+  }
+}
