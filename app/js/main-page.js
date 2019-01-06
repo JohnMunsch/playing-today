@@ -29,6 +29,13 @@ class MainPage extends LitElement {
             ></game-tabs>
           </div>
         </div>
+
+        <footer>
+          <div>
+            Copyright &copy; 2019
+            <a href="mailto:john.munsch@gmail.com">John Munsch</a>
+          </div>
+        </footer>
       </div>
     `;
   }

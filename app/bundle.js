@@ -246,6 +246,13 @@ class MainPage extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitEle
             ></game-tabs>
           </div>
         </div>
+
+        <footer>
+          <div>
+            Copyright &copy; 2019
+            <a href="mailto:john.munsch@gmail.com">John Munsch</a>
+          </div>
+        </footer>
       </div>
     `;
   }
@@ -471,13 +478,6 @@ class PlayingTodayApp extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__[
   render() {
     return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
       <main-page></main-page>
-
-      <footer>
-        <div>
-          Copyright &copy; 2018
-          <a href="mailto:john.munsch@gmail.com">John Munsch</a>
-        </div>
-      </footer>
     `;
   }
 }

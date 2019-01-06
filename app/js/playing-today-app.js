@@ -10,13 +10,6 @@ class PlayingTodayApp extends LitElement {
   render() {
     return html`
       <main-page></main-page>
-
-      <footer>
-        <div>
-          Copyright &copy; 2018
-          <a href="mailto:john.munsch@gmail.com">John Munsch</a>
-        </div>
-      </footer>
     `;
   }
 }
