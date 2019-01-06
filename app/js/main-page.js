@@ -1,6 +1,8 @@
 import { LitElement, html } from '@polymer/lit-element';
 
+import './game-tabs.component';
 import './nav-bar.component';
+import './players-list.component';
 
 class MainPage extends LitElement {
   createRenderRoot() {
@@ -14,17 +16,17 @@ class MainPage extends LitElement {
       <div class="container">
         <div class="row">
           <div class="col-md-4">
-            <players
+            <players-list
               active="$ctrl.state.user"
               state="$ctrl.state"
               playing="$ctrl.playing(uid, name, playingToday)"
-            ></players>
+            ></players-list>
           </div>
           <div class="col-md-8">
-            <tabs
+            <game-tabs
               games="$ctrl.state.games"
               num-players="$ctrl.state.counts.playersIn"
-            ></tabs>
+            ></game-tabs>
           </div>
         </div>
       </div>

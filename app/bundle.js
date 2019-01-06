@@ -86,6 +86,122 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./app/js/game-tabs.component.js":
+/*!***************************************!*\
+  !*** ./app/js/game-tabs.component.js ***!
+  \***************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
+/* harmony import */ var _games_list_component_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./games-list.component.js */ "./app/js/games-list.component.js");
+
+
+
+
+class GameTabs extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
+      <div class="gamesByPlayerCount">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active" ng-if="$ctrl.numPlayers > 0">
+            <a href="#tab-1" aria-controls="home" role="tab" data-toggle="tab">
+              Games for {{ $ctrl.numPlayers }} Players
+            </a>
+          </li>
+          <li role="presentation" ng-class="{ active: $ctrl.numPlayers === 0 }">
+            <a
+              href="#tab-2"
+              aria-controls="profile"
+              role="tab"
+              data-toggle="tab"
+            >
+              All Games
+            </a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="tab-1">
+            <games-list games="$ctrl.games" num-players="$ctrl.numPlayers"></games>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tab-2">
+            <games-list games="$ctrl.games"></games>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+customElements.define('game-tabs', GameTabs);
+
+
+/***/ }),
+
+/***/ "./app/js/games-list.component.js":
+/*!****************************************!*\
+  !*** ./app/js/games-list.component.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
+/* harmony import */ var _recommended_players_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./recommended-players.component */ "./app/js/recommended-players.component.js");
+
+
+
+
+class GamesList extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Game</th>
+            <th>Number of Players</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="(id, game) in $ctrl.onlyCompatible() | orderBy:'name'">
+          <td class="controls">
+            <span
+              class="glyphicon glyphicon-remove-sign"
+              aria-hidden="true"
+              ng-click="$ctrl.remove()"
+            ></span>
+          </td>
+          <td class="name">{{ game.name }}</td>
+          <td>
+            <recommended-players
+              num-players="game.numberOfPlayers"
+            ></recommended-players>
+          </td>
+        </tr>
+      </table>
+    `;
+  }
+}
+
+customElements.define('games-list', GamesList);
+
+
+/***/ }),
+
 /***/ "./app/js/main-page.js":
 /*!*****************************!*\
   !*** ./app/js/main-page.js ***!
@@ -96,7 +212,11 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
-/* harmony import */ var _nav_bar_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav-bar.component */ "./app/js/nav-bar.component.js");
+/* harmony import */ var _game_tabs_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./game-tabs.component */ "./app/js/game-tabs.component.js");
+/* harmony import */ var _nav_bar_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nav-bar.component */ "./app/js/nav-bar.component.js");
+/* harmony import */ var _players_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./players-list.component */ "./app/js/players-list.component.js");
+
+
 
 
 
@@ -113,17 +233,17 @@ class MainPage extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitEle
       <div class="container">
         <div class="row">
           <div class="col-md-4">
-            <players
+            <players-list
               active="$ctrl.state.user"
               state="$ctrl.state"
               playing="$ctrl.playing(uid, name, playingToday)"
-            ></players>
+            ></players-list>
           </div>
           <div class="col-md-8">
-            <tabs
+            <game-tabs
               games="$ctrl.state.games"
               num-players="$ctrl.state.counts.playersIn"
-            ></tabs>
+            ></game-tabs>
           </div>
         </div>
       </div>
@@ -132,17 +252,6 @@ class MainPage extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitEle
 }
 
 customElements.define('main-page', MainPage);
-
-
-/***/ }),
-
-/***/ "./app/js/model.js":
-/*!*************************!*\
-  !*** ./app/js/model.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
 
 
 /***/ }),
@@ -214,6 +323,131 @@ customElements.define('nav-bar', NavBar);
 
 /***/ }),
 
+/***/ "./app/js/players-list.component.js":
+/*!******************************************!*\
+  !*** ./app/js/players-list.component.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
+
+
+class PlayersList extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
+      <h2>
+        In
+        <span class="label label-default"
+          >{{ $ctrl.state.counts.playersIn }}</span
+        >
+      </h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th class="inOut">In/Out</th>
+          </tr>
+        </thead>
+        <tr
+          ng-repeat="(key, value) in $ctrl.state.players"
+          ng-if="value.playingToday"
+        >
+          <td class="name">{{ value.name }}</td>
+          <td class="inOut">
+            <div
+              class="btn-group btn-group-xs"
+              role="group"
+              aria-label="..."
+              ng-if="$ctrl.active.uid === key"
+            >
+              <button
+                type="button"
+                class="btn btn-default"
+                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: true })"
+                ng-class="{ active: value.playingToday }"
+              >
+                In
+              </button>
+              <button
+                type="button"
+                class="btn btn-default"
+                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: false })"
+                ng-class="{ active: !value.playingToday }"
+              >
+                Out
+              </button>
+            </div>
+            <div ng-if="$ctrl.active.uid !== key">
+              {{ value.playingToday ? 'In' : 'Out' }}
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <h2>
+        Out
+        <span class="label label-default"
+          >{{ $ctrl.state.counts.playersOut }}</span
+        >
+      </h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th class="inOut">In/Out</th>
+          </tr>
+        </thead>
+        <tr
+          ng-repeat="(key, value) in $ctrl.state.players"
+          ng-if="!value.playingToday"
+        >
+          <td class="name">{{ value.name }}</td>
+          <td class="inOut">
+            <div
+              class="btn-group btn-group-xs"
+              role="group"
+              aria-label="..."
+              ng-if="$ctrl.active.uid === key"
+            >
+              <button
+                type="button"
+                class="btn btn-default"
+                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: true })"
+                ng-class="{ active: value.playingToday }"
+              >
+                In
+              </button>
+              <button
+                type="button"
+                class="btn btn-default"
+                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: false })"
+                ng-class="{ active: !value.playingToday }"
+              >
+                Out
+              </button>
+            </div>
+            <div ng-if="$ctrl.active.uid !== key">
+              {{ value.playingToday ? 'In' : 'Out' }}
+            </div>
+          </td>
+        </tr>
+      </table>
+    `;
+  }
+}
+
+customElements.define('players-list', PlayersList);
+
+
+/***/ }),
+
 /***/ "./app/js/playing-today-app.js":
 /*!*************************************!*\
   !*** ./app/js/playing-today-app.js ***!
@@ -225,9 +459,6 @@ customElements.define('nav-bar', NavBar);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
 /* harmony import */ var _main_page_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main-page.js */ "./app/js/main-page.js");
-/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model */ "./app/js/model.js");
-/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_model__WEBPACK_IMPORTED_MODULE_2__);
-
 
 
 
@@ -252,6 +483,35 @@ class PlayingTodayApp extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__[
 }
 
 customElements.define('playing-today-app', PlayingTodayApp);
+
+
+/***/ }),
+
+/***/ "./app/js/recommended-players.component.js":
+/*!*************************************************!*\
+  !*** ./app/js/recommended-players.component.js ***!
+  \*************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
+
+
+class RecommendedPlayers extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
+      <svg class="numPlayers"></svg>
+    `;
+  }
+}
+
+customElements.define('recommended-players', RecommendedPlayers);
 
 
 /***/ }),
@@ -875,7 +1135,7 @@ UpdatingElement.properties = {};
 /*!**********************************************************!*\
   !*** ./node_modules/@polymer/lit-element/lit-element.js ***!
   \**********************************************************/
-/*! exports provided: notEqual, UpdatingElement, customElement, property, query, queryAll, eventOptions, html, svg, LitElement */
+/*! exports provided: html, svg, LitElement, notEqual, UpdatingElement, customElement, property, query, queryAll, eventOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

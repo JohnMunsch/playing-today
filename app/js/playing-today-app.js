@@ -1,7 +1,6 @@
 import { LitElement, html } from '@polymer/lit-element';
 
 import MainPage from './main-page.js';
-import Model from './model';
 
 class PlayingTodayApp extends LitElement {
   createRenderRoot() {
