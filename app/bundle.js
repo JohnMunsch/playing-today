@@ -96,6 +96,9 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
+/* harmony import */ var _nav_bar_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav-bar.component */ "./app/js/nav-bar.component.js");
+
+
 
 
 class MainPage extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
@@ -140,6 +143,73 @@ customElements.define('main-page', MainPage);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+
+
+/***/ }),
+
+/***/ "./app/js/nav-bar.component.js":
+/*!*************************************!*\
+  !*** ./app/js/nav-bar.component.js ***!
+  \*************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @polymer/lit-element */ "./node_modules/@polymer/lit-element/lit-element.js");
+
+
+class NavBar extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#navbar"
+              aria-expanded="false"
+              aria-controls="navbar"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span> <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"
+              ><img class="logo" src="img/meeple.svg" />
+              <div>Playing today?</div></a
+            >
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <form
+              class="navbar-form navbar-right"
+              role="form"
+              ng-if="$ctrl.user !== null"
+            >
+              <button
+                type="submit"
+                class="btn btn-success"
+                ng-click="$ctrl.signOut()"
+              >
+                Sign out
+              </button>
+            </form>
+            <p class="navbar-text navbar-right">{{ $ctrl.user.email }}</p>
+          </div>
+          <!--/.navbar-collapse -->
+        </div>
+      </nav>
+    `;
+  }
+}
+
+customElements.define('nav-bar', NavBar);
 
 
 /***/ }),
@@ -805,7 +875,7 @@ UpdatingElement.properties = {};
 /*!**********************************************************!*\
   !*** ./node_modules/@polymer/lit-element/lit-element.js ***!
   \**********************************************************/
-/*! exports provided: html, svg, LitElement, notEqual, UpdatingElement, customElement, property, query, queryAll, eventOptions */
+/*! exports provided: notEqual, UpdatingElement, customElement, property, query, queryAll, eventOptions, html, svg, LitElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

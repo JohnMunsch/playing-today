@@ -1,5 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 
+import './nav-bar.component';
+
 class MainPage extends LitElement {
   createRenderRoot() {
     return this;
