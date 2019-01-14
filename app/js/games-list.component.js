@@ -3,10 +3,38 @@ import { LitElement, html } from '@polymer/lit-element';
 import './recommended-players.component';
 
 class GamesList extends LitElement {
+  static get properties() {
+    return { games: { type: Array } };
+  }
+
+  remove() {}
+
   createRenderRoot() {
     return this;
   }
 
+  renderListOfGames(games) {
+    console.log(games);
+    return games.map(game => {
+      return html`
+        <tr>
+          <td class="controls">
+            <span
+              class="glyphicon glyphicon-remove-sign"
+              aria-hidden="true"
+              @click="${this.remove}"
+            ></span>
+          </td>
+          <td class="name">${game.name}</td>
+          <td>
+            <recommended-players
+              .num-players="game.numberOfPlayers"
+            ></recommended-players>
+          </td>
+        </tr>
+      `;
+    });
+  }
   render() {
     return html`
       <table class="table table-striped">
@@ -17,21 +45,9 @@ class GamesList extends LitElement {
             <th>Number of Players</th>
           </tr>
         </thead>
-        <tr ng-repeat="(id, game) in $ctrl.onlyCompatible() | orderBy:'name'">
-          <td class="controls">
-            <span
-              class="glyphicon glyphicon-remove-sign"
-              aria-hidden="true"
-              ng-click="$ctrl.remove()"
-            ></span>
-          </td>
-          <td class="name">{{ game.name }}</td>
-          <td>
-            <recommended-players
-              num-players="game.numberOfPlayers"
-            ></recommended-players>
-          </td>
-        </tr>
+        <tbody>
+          ${this.renderListOfGames(this.games)}
+        </tbody>
       </table>
     `;
   }

@@ -102,6 +102,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class GameTabs extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  static get properties() {
+    return { games: { type: Array }, numPlayers: { type: Number } };
+  }
+
   createRenderRoot() {
     return this;
   }
@@ -113,10 +117,13 @@ class GameTabs extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitEle
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active" ng-if="$ctrl.numPlayers > 0">
             <a href="#tab-1" aria-controls="home" role="tab" data-toggle="tab">
-              Games for {{ $ctrl.numPlayers }} Players
+              Games for ${this.numPlayers} Players
             </a>
           </li>
-          <li role="presentation" ng-class="{ active: $ctrl.numPlayers === 0 }">
+          <li
+            role="presentation"
+            class="${this.numPlayers === 0 ? 'active' : ''}"
+          >
             <a
               href="#tab-2"
               aria-controls="profile"
@@ -131,10 +138,13 @@ class GameTabs extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitEle
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="tab-1">
-            <games-list games="$ctrl.games" num-players="$ctrl.numPlayers"></games>
+            <games-list
+              .games="${this.games}"
+              .num-players="${this.numPlayers}"
+            ></games-list>
           </div>
           <div role="tabpanel" class="tab-pane" id="tab-2">
-            <games-list games="$ctrl.games"></games>
+            <games-list .games="${this.games}"></games-list>
           </div>
         </div>
       </div>
@@ -163,10 +173,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class GamesList extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitElement"] {
+  static get properties() {
+    return { games: { type: Array } };
+  }
+
+  remove() {}
+
   createRenderRoot() {
     return this;
   }
 
+  renderListOfGames(games) {
+    console.log(games);
+    return games.map(game => {
+      return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
+        <tr>
+          <td class="controls">
+            <span
+              class="glyphicon glyphicon-remove-sign"
+              aria-hidden="true"
+              @click="${this.remove}"
+            ></span>
+          </td>
+          <td class="name">${game.name}</td>
+          <td>
+            <recommended-players
+              .num-players="game.numberOfPlayers"
+            ></recommended-players>
+          </td>
+        </tr>
+      `;
+    });
+  }
   render() {
     return _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["html"]`
       <table class="table table-striped">
@@ -177,21 +215,9 @@ class GamesList extends _polymer_lit_element__WEBPACK_IMPORTED_MODULE_0__["LitEl
             <th>Number of Players</th>
           </tr>
         </thead>
-        <tr ng-repeat="(id, game) in $ctrl.onlyCompatible() | orderBy:'name'">
-          <td class="controls">
-            <span
-              class="glyphicon glyphicon-remove-sign"
-              aria-hidden="true"
-              ng-click="$ctrl.remove()"
-            ></span>
-          </td>
-          <td class="name">{{ game.name }}</td>
-          <td>
-            <recommended-players
-              num-players="game.numberOfPlayers"
-            ></recommended-players>
-          </td>
-        </tr>
+        <tbody>
+          ${this.renderListOfGames(this.games)}
+        </tbody>
       </table>
     `;
   }
