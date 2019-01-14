@@ -1,7 +1,71 @@
 import { LitElement, html } from '@polymer/lit-element';
 
 class PlayersList extends LitElement {
+  static get properties() {
+    return {
+      user: { type: Object },
+      players: { type: Array }
+    };
+  }
+
+  playersIn(players) {
+    return 2;
+  }
+
+  playersOut(players) {
+    return 8;
+  }
+
+  renderControlsOrStatus(player, user) {
+    if (player.uid == user.uid) {
+      return html`
+        <div
+          class="btn-group btn-group-xs"
+          role="group"
+          aria-label="..."
+          ng-if="$ctrl.active.uid === key"
+        >
+          <button
+            type="button"
+            class="btn btn-default"
+            ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: true })"
+            ng-class="{ active: value.playingToday }"
+          >
+            In
+          </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: false })"
+            ng-class="{ active: !value.playingToday }"
+          >
+            Out
+          </button>
+        </div>
+      `;
+    } else {
+      return html`
+        <div>${player.playingToday ? 'In' : 'Out'}</div>
+      `;
+    }
+  }
+
+  renderListOfPlayers(players, user, playing) {
+    return players.map(player => {
+      if (player.playingToday == playing) {
+        return html`
+          <tr>
+            <td class="name">${player.name}</td>
+            <td class="inOut">${this.renderControlsOrStatus(player, user)}</td>
+          </tr>
+        `;
+      }
+    });
+  }
+
   createRenderRoot() {
+    // This avoids us building our component with Shadow DOM so we can use Bootstrap
+    // or another CSS framework (which Shadow DOM would interfere with).
     return this;
   }
 
@@ -9,9 +73,7 @@ class PlayersList extends LitElement {
     return html`
       <h2>
         In
-        <span class="label label-default"
-          >{{ $ctrl.state.counts.playersIn }}</span
-        >
+        <span class="label label-default">${this.playersIn(this.players)}</span>
       </h2>
       <table class="table table-striped">
         <thead>
@@ -20,46 +82,15 @@ class PlayersList extends LitElement {
             <th class="inOut">In/Out</th>
           </tr>
         </thead>
-        <tr
-          ng-repeat="(key, value) in $ctrl.state.players"
-          ng-if="value.playingToday"
-        >
-          <td class="name">{{ value.name }}</td>
-          <td class="inOut">
-            <div
-              class="btn-group btn-group-xs"
-              role="group"
-              aria-label="..."
-              ng-if="$ctrl.active.uid === key"
-            >
-              <button
-                type="button"
-                class="btn btn-default"
-                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: true })"
-                ng-class="{ active: value.playingToday }"
-              >
-                In
-              </button>
-              <button
-                type="button"
-                class="btn btn-default"
-                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: false })"
-                ng-class="{ active: !value.playingToday }"
-              >
-                Out
-              </button>
-            </div>
-            <div ng-if="$ctrl.active.uid !== key">
-              {{ value.playingToday ? 'In' : 'Out' }}
-            </div>
-          </td>
-        </tr>
+        <tbody>
+          ${this.renderListOfPlayers(this.players, this.user, true)}
+        </tbody>
       </table>
 
       <h2>
         Out
         <span class="label label-default"
-          >{{ $ctrl.state.counts.playersOut }}</span
+          >${this.playersOut(this.players)}</span
         >
       </h2>
       <table class="table table-striped">
@@ -69,40 +100,9 @@ class PlayersList extends LitElement {
             <th class="inOut">In/Out</th>
           </tr>
         </thead>
-        <tr
-          ng-repeat="(key, value) in $ctrl.state.players"
-          ng-if="!value.playingToday"
-        >
-          <td class="name">{{ value.name }}</td>
-          <td class="inOut">
-            <div
-              class="btn-group btn-group-xs"
-              role="group"
-              aria-label="..."
-              ng-if="$ctrl.active.uid === key"
-            >
-              <button
-                type="button"
-                class="btn btn-default"
-                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: true })"
-                ng-class="{ active: value.playingToday }"
-              >
-                In
-              </button>
-              <button
-                type="button"
-                class="btn btn-default"
-                ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: false })"
-                ng-class="{ active: !value.playingToday }"
-              >
-                Out
-              </button>
-            </div>
-            <div ng-if="$ctrl.active.uid !== key">
-              {{ value.playingToday ? 'In' : 'Out' }}
-            </div>
-          </td>
-        </tr>
+        <tbody>
+          ${this.renderListOfPlayers(this.players, this.user, false)}
+        </tbody>
       </table>
     `;
   }

@@ -1,6 +1,19 @@
 import { LitElement, html } from '@polymer/lit-element';
 
 class NavBar extends LitElement {
+  static get properties() {
+    return {
+      user: { type: Object }
+    };
+  }
+
+  signOut() {
+    let signOutEvent = new CustomEvent('sign-out', {
+      detail: { message: 'hello. a load-complete happened.' }
+    });
+    this.dispatchEvent(signOutEvent);
+  }
+
   createRenderRoot() {
     return this;
   }
@@ -31,17 +44,17 @@ class NavBar extends LitElement {
             <form
               class="navbar-form navbar-right"
               role="form"
-              ng-if="$ctrl.user !== null"
+              ng-if="this.user !== null"
             >
               <button
                 type="submit"
                 class="btn btn-success"
-                ng-click="$ctrl.signOut()"
+                @click="${this.signOut}"
               >
                 Sign out
               </button>
             </form>
-            <p class="navbar-text navbar-right">{{ $ctrl.user.email }}</p>
+            <p class="navbar-text navbar-right">${this.user.email}</p>
           </div>
           <!--/.navbar-collapse -->
         </div>
