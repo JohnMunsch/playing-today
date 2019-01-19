@@ -13,6 +13,9 @@ module.exports = {
     ]
   },
   devtool: 'source-map',
+  devServer: {
+    contentBase: './app'
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
