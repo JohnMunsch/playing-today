@@ -1,16 +1,18 @@
 type Query {
   info: String!
+  me: Player!
   games: [Game!]!
   players: [Player!]!
 }
 
 type Mutation {
-  playing(id: String!, playingToday: Boolean!): Boolean
+  playing(id: String!, playingToday: Boolean!): Player!
 
   createGame(name: String!, notes: String, players: RecommendationInput): Game!
-  deleteGame(id: String!): Boolean
+  deleteGame(id: String!): Game
 
   createPlayer(email: String!): Player!
+  deletePlayer(id: String!): Player
 }
 
 type Game {
