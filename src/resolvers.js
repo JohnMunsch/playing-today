@@ -1,5 +1,6 @@
 let games = [
   {
+    id: 'bf2eac92-d567-4c8f-9292-bc381c81b7ff',
     name: 'Carcassonne',
     notes: 'Plays with six if you add the Inns & Cathedrals.',
     players: [
@@ -10,6 +11,7 @@ let games = [
     ]
   },
   {
+    id: '8b7225b3-49e8-4faa-a688-6903daabd831',
     name: 'Jamaica',
     players: [
       { best: 3.9, not: 58.3, num: 2, recommended: 37.9 },
@@ -20,6 +22,7 @@ let games = [
     ]
   },
   {
+    id: 'c9aedb08-4750-4e30-b151-5d0af893db31',
     name: 'Augustus',
     players: [
       { best: 6.7, not: 20, num: 2, recommended: 73.3 },
@@ -30,6 +33,7 @@ let games = [
     ]
   },
   {
+    id: '56add321-2739-477e-904c-a98efdfcd781',
     name: 'No Thanks!',
     players: [
       { best: 1, not: 92.2, num: 2, recommended: 6.8 },
@@ -39,6 +43,7 @@ let games = [
     ]
   },
   {
+    id: '2b749a03-2064-4bd1-91d7-7e031bc7c925',
     name: 'Rattus',
     players: [
       { best: 6.8, not: 45.9, num: 2, recommended: 47.3 },
@@ -47,10 +52,12 @@ let games = [
     ]
   },
   {
+    id: 'f04b9d3c-f881-49bb-8550-607c536192d0',
     name: 'Agricola: All Creatures Big and Small',
     players: [{ best: 94, not: 1.2, num: 2, recommended: 4.8 }]
   },
   {
+    id: '663e1f22-f49c-454e-810f-a9d1a2b2b9e6',
     name: 'Dice Town',
     players: [
       { best: 4.7, not: 53.5, num: 2, recommended: 41.9 },
@@ -60,6 +67,7 @@ let games = [
     ]
   },
   {
+    id: '51924643-f638-46c2-9a3c-c57388efc5b0',
     name: 'Saboteur',
     players: [
       { best: 1.4, not: 83.7, num: 3, recommended: 15 },
@@ -73,6 +81,7 @@ let games = [
     ]
   },
   {
+    id: '24e07277-07b1-4f2f-8211-a5b0edb64c18',
     name: 'Bang! The Dice Game',
     players: [
       { best: 0, not: 87.1, num: 3, recommended: 12.9 },
@@ -84,6 +93,7 @@ let games = [
     ]
   },
   {
+    id: '1f93c211-2a6e-45c4-9a7e-a1eee54cd673',
     name: 'Cacao',
     players: [
       { best: 19.4, not: 6.5, num: 2, recommended: 74.2 },
@@ -92,6 +102,7 @@ let games = [
     ]
   },
   {
+    id: '5994017b-c74f-4be6-a98b-f9aeb4e8e502',
     name: 'Dominion',
     players: [
       { best: 38.4, not: 6, num: 2, recommended: 55.6 },
@@ -100,6 +111,7 @@ let games = [
     ]
   },
   {
+    id: '330b1f99-a58f-4a54-b8ef-77fc5de49f32',
     name: 'For Sale',
     players: [
       { best: 7.7, not: 19.6, num: 3, recommended: 72.6 },
@@ -109,6 +121,7 @@ let games = [
     ]
   },
   {
+    id: '66536087-e2b1-4577-8cfd-32d21645cd70',
     name: 'High Society',
     players: [
       { best: 20, not: 21.5, num: 3, recommended: 58.5 },
@@ -117,6 +130,7 @@ let games = [
     ]
   },
   {
+    id: '290d4c7b-0283-4f7c-af7c-1c482adc3604',
     name: 'Sushi Go',
     players: [
       { best: 5.7, not: 39.8, num: 2, recommended: 54.5 },
@@ -126,6 +140,7 @@ let games = [
     ]
   },
   {
+    id: '72224ded-ba1c-46b1-be50-ba37b0d757e2',
     name: 'Coup Rebellion G54',
     players: [
       { best: 7.1, not: 28.6, num: 3, recommended: 64.3 },
@@ -135,6 +150,7 @@ let games = [
     ]
   },
   {
+    id: '52301397-b561-4a09-95ae-2afcb2f129eb',
     name: 'Splendor',
     players: [
       { best: 34.5, not: 7.8, num: 2, recommended: 57.8 },
@@ -143,6 +159,7 @@ let games = [
     ]
   },
   {
+    id: 'ff726975-ebab-40ba-bc38-e547d5f8d5f5',
     name: 'Settlers of Catan, The',
     players: [
       { best: 35, not: 7.1, num: 3, recommended: 57.9 },
@@ -150,62 +167,71 @@ let games = [
     ]
   },
   {
+    id: '97a63307-16c5-42c5-a156-dbb3dde3c58b',
     name: 'Carcassonne: The Castle',
     players: [{ best: 96.5, not: 0, num: 2, recommended: 3.5 }]
   }
 ];
 let players = [
   {
-    id: '4ajsIxK3zJeCD39JoP0IDNGY4t82',
+    id: 'fd89b8ae-c5d9-4420-a54e-730d21661698',
     email: 'mike.wartberg@aptitude.com',
     playingToday: false
   },
   {
-    id: '6plMXPEIgoO4CYNUHp6HZEuDQ352',
+    id: 'ffcada8b-7637-4847-b040-055090496ed7',
     email: 'john.munsch@aptitude.com',
     playingToday: true
   },
   {
-    id: 'CXbucJgnHcW6LK68blG3RVozg3D2',
+    id: '632d994f-9a3c-4c22-bc10-7460b1e1ac0c',
     email: 'trang.ngo@aptitude.com',
     playingToday: false
   },
   {
-    id: 'DcX0mno0e8T5ewKbw4yAN9Tv7EF2',
+    id: '9a030301-c50e-4d5f-bb8a-c5b5bf94d365',
     email: 'sfisherm@vha.com',
     playingToday: true
   },
   {
-    id: 'IMkuyDvmYNMYEIIfkV28HVmFZl62',
+    id: '2ce12aba-9a04-4c7a-99ac-2c5e748221ef',
     email: 'luis.gomez@aptitude.com',
     playingToday: false
   },
   {
-    id: 'PCLW3bxNgxPaq4bosKIpSiEFRYY2',
+    id: '14e853b3-3f9d-4706-ac02-ac697cd2a27e',
     email: 'david.daniels@aptitude.com',
     playingToday: false
   },
   {
-    id: 'YeRVOKsi7sVhcsz75vATE9AZdRL2',
+    id: 'f87b8aaa-1d51-4e06-abd0-2c0f9a8dac62',
     email: 'mike.nguchie@aptitude.com',
     playingToday: false
   },
   {
-    id: 'cDXTUxWBGwcPXsNzkRgc6x88uAR2',
+    id: '01d431fc-d729-4a32-b16c-f57cd284a69f',
     email: 'barry.forrest@vizientinc.com',
     playingToday: false
   },
   {
-    id: 'sSNQFNHhzOOFhnPx7ydssl7gixr1',
+    id: '04ff1fc9-14ee-4851-bc7f-7c0d690d2d86',
     email: 'richard.morgan@aptitude.com',
     playingToday: false
   },
   {
-    id: 'vok5IUKHdaRBPvNlEYzhtjNYy4t1',
+    id: 'e164bb94-1e4e-4b34-b421-006e2666a3e5',
     email: 'kavya.katam@aptitude.com',
     playingToday: false
   }
 ];
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
 module.exports = {
   Query: {
@@ -233,7 +259,7 @@ module.exports = {
     // (name: String!, notes: String, players: RecommendationInput): Game!
     createGame: (context, args) => {
       let newGame = {
-        // TODO: Add ID.
+        id: uuidv4(),
         name: args.name,
         notes: args.notes,
         players: args.players
@@ -262,7 +288,7 @@ module.exports = {
     // (email: String!): Player!
     createPlayer: (context, args) => {
       let newPlayer = {
-        // TODO: Add ID.
+        id: uuidv4(),
         email: args.email,
         playingToday: false
       };

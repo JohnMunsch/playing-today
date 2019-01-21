@@ -17,7 +17,7 @@ class PlayersList extends LitElement {
   }
 
   renderControlsOrStatus(player, user) {
-    if (player.uid == user.uid) {
+    if (player.id == user.id) {
       return html`
         <div
           class="btn-group btn-group-xs"
@@ -55,7 +55,7 @@ class PlayersList extends LitElement {
       if (player.playingToday == playing) {
         return html`
           <tr>
-            <td class="name">${player.name}</td>
+            <td class="name">${player.email}</td>
             <td class="inOut">${this.renderControlsOrStatus(player, user)}</td>
           </tr>
         `;

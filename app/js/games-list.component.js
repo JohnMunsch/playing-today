@@ -14,7 +14,6 @@ class GamesList extends LitElement {
   }
 
   renderListOfGames(games) {
-    console.log(games);
     return games.map(game => {
       return html`
         <tr>
