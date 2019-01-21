@@ -1,0 +1,41 @@
+type Query {
+  info: String!
+  games: [Game!]!
+  players: [Player!]!
+}
+
+type Mutation {
+  playing(id: String!, playingToday: Boolean!): Boolean
+
+  createGame(name: String!, notes: String, players: RecommendationInput): Game!
+  deleteGame(id: String!): Boolean
+
+  createPlayer(email: String!): Player!
+}
+
+type Game {
+  id: String!
+  name: String!
+  notes: String
+  players: [Recommendation!]
+}
+
+type Recommendation {
+  num: Int!
+  best: Float!
+  not: Float!
+  recommended: Float!
+}
+
+input RecommendationInput {
+  num: Int!
+  best: Float!
+  not: Float!
+  recommended: Float!
+}
+
+type Player {
+  id: String!
+  email: String!
+  playingToday: Boolean!
+}

@@ -5,7 +5,8 @@
   "scripts": {
     "watch": "webpack -w",
     "build": "webpack --mode=production",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "server": "nodemon -e js,mjs,json,graphql src/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "@polymer/lit-element": "^0.6.5"
+    "@polymer/lit-element": "^0.6.5",
+    "graphql-yoga": "^1.17.0"
   }
 }
