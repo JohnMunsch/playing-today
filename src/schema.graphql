@@ -7,12 +7,17 @@ type Query {
 
 type Mutation {
   playing(id: String!, playingToday: Boolean!): Player!
+  reset: Boolean!
 
   createGame(name: String!, notes: String, players: RecommendationInput): Game!
   deleteGame(id: String!): Game
 
   createPlayer(email: String!): Player!
   deletePlayer(id: String!): Player
+}
+
+type Subscription {
+  
 }
 
 type Game {

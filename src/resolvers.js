@@ -256,6 +256,16 @@ module.exports = {
       return player;
     },
 
+    reset: () => {
+      players = players.map(player => {
+        player.playingToday = false;
+
+        return player;
+      });
+
+      return false;
+    },
+
     // (name: String!, notes: String, players: RecommendationInput): Game!
     createGame: (context, args) => {
       let newGame = {
