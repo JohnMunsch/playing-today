@@ -30,7 +30,9 @@
     "apollo-cache-inmemory": "^1.4.2",
     "apollo-client": "^2.5.0-alpha.10",
     "apollo-link-http": "^1.5.9",
+    "apollo-link-ws": "^1.0.12",
     "graphql-tag": "^2.10.1",
-    "graphql-yoga": "^1.17.0"
+    "graphql-yoga": "^1.17.0",
+    "subscriptions-transport-ws": "^0.9.15"
   }
 }

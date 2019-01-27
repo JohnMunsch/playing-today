@@ -233,6 +233,8 @@ function uuidv4() {
   });
 }
 
+const STATUS_CHANGED_TOPIC = 'Status Changed';
+
 module.exports = {
   Query: {
     info: () =>
@@ -247,21 +249,25 @@ module.exports = {
   },
   Mutation: {
     // (id: String!, playingToday: Boolean!): Player!
-    playing: (context, args) => {
+    playing: (context, args, { pubsub }) => {
       // Find the player in question and set his/her status for gaming today.
       let player = players.find(player => player.id === args.id);
 
       player.playingToday = args.playingToday;
 
+      pubsub.publish(STATUS_CHANGED_TOPIC, { statusChange: players });
+
       return player;
     },
 
-    reset: () => {
+    reset: (parent, args, { pubsub }) => {
       players = players.map(player => {
         player.playingToday = false;
 
         return player;
       });
+
+      pubsub.publish(STATUS_CHANGED_TOPIC, { statusChange: players });
 
       return false;
     },
@@ -296,7 +302,7 @@ module.exports = {
     },
 
     // (email: String!): Player!
-    createPlayer: (context, args) => {
+    createPlayer: (context, args, { pubsub }) => {
       let newPlayer = {
         id: uuidv4(),
         email: args.email,
@@ -305,10 +311,12 @@ module.exports = {
 
       players.push(newPlayer);
 
+      pubsub.publish(STATUS_CHANGED_TOPIC, { statusChange: players });
+
       return newPlayer;
     },
     // (id: String!): Player!
-    deletePlayer: (context, args) => {
+    deletePlayer: (context, args, { pubsub }) => {
       let match = null;
 
       players = players.filter(player => {
@@ -320,7 +328,16 @@ module.exports = {
         }
       });
 
+      pubsub.publish(STATUS_CHANGED_TOPIC, { statusChange: players });
+
       return match;
+    }
+  },
+  Subscription: {
+    statusChange: {
+      subscribe: (parent, args, { pubsub }) => {
+        return pubsub.asyncIterator(STATUS_CHANGED_TOPIC);
+      }
     }
   }
 };

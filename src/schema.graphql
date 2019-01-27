@@ -17,7 +17,7 @@ type Mutation {
 }
 
 type Subscription {
-  
+  statusChange: [Player]!
 }
 
 type Game {
