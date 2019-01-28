@@ -12,6 +12,9 @@ import './game-tabs.component';
 import './nav-bar.component';
 import './players-list.component';
 
+function emailSort(a, b) {
+  return a.localeCompare(b);
+}
 class MainPage extends LitElement {
   static get properties() {
     return {
@@ -84,7 +87,7 @@ class MainPage extends LitElement {
       })
       .then(results => {
         this.user = results.data.me;
-        this.players = results.data.players;
+        this.players = results.data.players.sort(emailSort);
         this.games = results.data.games;
 
         this.requestUpdate;
@@ -103,7 +106,7 @@ class MainPage extends LitElement {
         `
       })
       .subscribe(
-        results => (this.players = results.data.statusChange),
+        results => (this.players = results.data.statusChange.sort(emailSort)),
         error => console.error(error)
       );
   }
