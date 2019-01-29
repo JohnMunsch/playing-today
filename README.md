@@ -12,5 +12,6 @@ All of the JavaScript files here are use ES6 JS (arrow functions, string templat
 
 ## Development and Testing
 
-'npm run webpack' - Builds the app and watches for changes to recompile as you do development.
+'npm start' - Builds the app and watches for changes to recompile as you do development.
 'npm run build' - Builds a "Production" version of the app rather than a "Development" version. Basically that just means that it's a lot smaller for deployment to your server.
+'npm run server' - Fires up a server (under Nodemon so it will watch for and restart after code changes) that offers a mocked up GraphQL server for testing purposes. Note: Since it is just using in-memory data, the restarting causes it to lose all updates if you change any code. Ultimately this will need to be fixed to use Postgres (possibly using Prisma) or Couchbase or virtually anything that actually persists changes.
