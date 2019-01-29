@@ -19,16 +19,17 @@ class PlayersList extends LitElement {
   renderControlsOrStatus(player, user) {
     if (player.id == user.id) {
       return html`
-        <div
-          class="btn-group btn-group-xs"
-          role="group"
-          aria-label="..."
-          ng-if="$ctrl.active.uid === key"
-        >
+        <div class="btn-group btn-group-xs">
           <button
             type="button"
             class="btn btn-default"
-            ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: true })"
+            @click="${
+              this.playing({
+                uid: $ctrl.active.uid,
+                name: $ctrl.active.email,
+                playingToday: true
+              })
+            }"
             ng-class="{ active: value.playingToday }"
           >
             In
@@ -36,7 +37,13 @@ class PlayersList extends LitElement {
           <button
             type="button"
             class="btn btn-default"
-            ng-click="$ctrl.playing({ uid: $ctrl.active.uid, name: $ctrl.active.email, playingToday: false })"
+            @click="${
+              this.playing({
+                uid: $ctrl.active.uid,
+                name: $ctrl.active.email,
+                playingToday: false
+              })
+            }"
             ng-class="{ active: !value.playingToday }"
           >
             Out
