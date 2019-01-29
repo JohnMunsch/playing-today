@@ -87,7 +87,7 @@ class MainPage extends LitElement {
       })
       .then(results => {
         this.user = results.data.me;
-        this.players = results.data.players.sort(emailSort);
+        this.players = results.data.players;
         this.games = results.data.games;
 
         this.requestUpdate;
@@ -106,7 +106,7 @@ class MainPage extends LitElement {
         `
       })
       .subscribe(
-        results => (this.players = results.data.statusChange.sort(emailSort)),
+        results => (this.players = results.data.statusChange),
         error => console.error(error)
       );
   }
