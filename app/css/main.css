@@ -59,9 +59,9 @@ games .table tbody tr td.controls {
   vertical-align: middle;
 }
 
-games .numPlayers text {
+games-list .numPlayers text {
   color: black;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 tabs .gamesByPlayerCount {
