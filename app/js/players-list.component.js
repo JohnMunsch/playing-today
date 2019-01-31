@@ -9,11 +9,15 @@ class PlayersList extends LitElement {
   }
 
   playersIn(players) {
-    return 2;
+    return players.reduce((sum, player) => {
+      return sum + (player.playingToday ? 1 : 0);
+    }, 0);
   }
 
   playersOut(players) {
-    return 8;
+    return players.reduce((sum, player) => {
+      return sum + (player.playingToday ? 0 : 1);
+    }, 0);
   }
 
   renderControlsOrStatus(player, user) {
@@ -22,29 +26,15 @@ class PlayersList extends LitElement {
         <div class="btn-group btn-group-xs">
           <button
             type="button"
-            class="btn btn-default"
-            @click="${
-              this.playing({
-                uid: $ctrl.active.uid,
-                name: $ctrl.active.email,
-                playingToday: true
-              })
-            }"
-            ng-class="{ active: value.playingToday }"
+            class="btn btn-default ${!user.playingToday ? 'active' : ''}"
+            @click="${this.playing}"
           >
             In
           </button>
           <button
             type="button"
-            class="btn btn-default"
-            @click="${
-              this.playing({
-                uid: $ctrl.active.uid,
-                name: $ctrl.active.email,
-                playingToday: false
-              })
-            }"
-            ng-class="{ active: !value.playingToday }"
+            class="btn btn-default ${user.playingToday ? 'active' : ''}"
+            @click="${this.playing}"
           >
             Out
           </button>

@@ -27,6 +27,10 @@ class MainPage extends LitElement {
   constructor() {
     super();
 
+    this.user = {};
+    this.games = [];
+    this.players = [];
+
     const cache = new InMemoryCache();
     const httpLink = new HttpLink({
       uri: 'http://localhost:4000/'
@@ -54,10 +58,6 @@ class MainPage extends LitElement {
       cache,
       link
     });
-
-    this.user = {};
-    this.games = [];
-    this.players = [];
 
     client
       .query({
