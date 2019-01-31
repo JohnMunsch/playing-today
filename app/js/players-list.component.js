@@ -20,6 +20,22 @@ class PlayersList extends LitElement {
     }, 0);
   }
 
+  in(e) {
+    this.dispatchEvent(
+      new CustomEvent('status-changed', {
+        detail: { id: this.user.id, playingToday: true }
+      })
+    );
+  }
+
+  out(e) {
+    this.dispatchEvent(
+      new CustomEvent('status-changed', {
+        detail: { id: this.user.id, playingToday: false }
+      })
+    );
+  }
+
   renderControlsOrStatus(player, user) {
     if (player.id == user.id) {
       return html`
@@ -27,14 +43,14 @@ class PlayersList extends LitElement {
           <button
             type="button"
             class="btn btn-default ${!user.playingToday ? 'active' : ''}"
-            @click="${this.playing}"
+            @click="${this.in}"
           >
             In
           </button>
           <button
             type="button"
             class="btn btn-default ${user.playingToday ? 'active' : ''}"
-            @click="${this.playing}"
+            @click="${this.out}"
           >
             Out
           </button>

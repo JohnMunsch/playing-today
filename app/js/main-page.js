@@ -54,12 +54,12 @@ class MainPage extends LitElement {
       httpLink
     );
 
-    const client = new ApolloClient({
+    this.client = new ApolloClient({
       cache,
       link
     });
 
-    client
+    this.client
       .query({
         query: gql`
           query {
@@ -93,7 +93,7 @@ class MainPage extends LitElement {
         this.requestUpdate;
       });
 
-    client
+    this.client
       .subscribe({
         query: gql`
           subscription {
@@ -112,7 +112,28 @@ class MainPage extends LitElement {
   }
 
   playingStatusChanged(event) {
-    console.log('playingStatusChanged');
+    console.log(event);
+    // Find the player in the local of players and change status to match.
+    this.players = this.players.map(player => {
+      if (player.id === event.detail.id) {
+        player.playingToday = event.detail.playingToday;
+      }
+
+      return player;
+    });
+
+    // Make a mutation request via GraphQL to persist the change.
+    this.client
+      .mutate({
+        mutation: gql`
+          mutation {
+            playing(id: "${event.detail.id}", playingToday: ${
+          event.detail.playingToday
+        }) { playingToday }
+        }
+        `
+      })
+      .then(results => console.log(results), error => console.error(error));
   }
 
   signOut(event) {
@@ -135,7 +156,7 @@ class MainPage extends LitElement {
             <players-list
               .user="${this.user}"
               .players="${this.players}"
-              @playing-status-changed="${this.playingStatusChanged}"
+              @status-changed="${this.playingStatusChanged}"
             ></players-list>
           </div>
           <div class="col-md-8">
