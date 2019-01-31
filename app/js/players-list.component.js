@@ -42,14 +42,14 @@ class PlayersList extends LitElement {
         <div class="btn-group btn-group-xs">
           <button
             type="button"
-            class="btn btn-default ${!user.playingToday ? 'active' : ''}"
+            class="btn btn-default ${player.playingToday ? 'active' : ''}"
             @click="${this.in}"
           >
             In
           </button>
           <button
             type="button"
-            class="btn btn-default ${user.playingToday ? 'active' : ''}"
+            class="btn btn-default ${!player.playingToday ? 'active' : ''}"
             @click="${this.out}"
           >
             Out
