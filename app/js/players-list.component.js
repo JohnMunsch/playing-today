@@ -23,7 +23,7 @@ class PlayersList extends LitElement {
   in(e) {
     this.dispatchEvent(
       new CustomEvent('status-changed', {
-        detail: { id: this.user.id, playingToday: true }
+        detail: { id: this.user._id, playingToday: true }
       })
     );
   }
@@ -31,13 +31,13 @@ class PlayersList extends LitElement {
   out(e) {
     this.dispatchEvent(
       new CustomEvent('status-changed', {
-        detail: { id: this.user.id, playingToday: false }
+        detail: { id: this.user._id, playingToday: false }
       })
     );
   }
 
   renderControlsOrStatus(player, user) {
-    if (player.id == user.id) {
+    if (player._id == user._id) {
       return html`
         <div class="btn-group btn-group-xs">
           <button

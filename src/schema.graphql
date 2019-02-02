@@ -21,7 +21,7 @@ type Subscription {
 }
 
 type Game {
-  id: String!
+  _id: String!
   name: String!
   notes: String
   players: [Recommendation!]
@@ -42,7 +42,7 @@ input RecommendationInput {
 }
 
 type Player {
-  id: String!
+  _id: String!
   email: String!
   playingToday: Boolean!
 }

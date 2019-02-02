@@ -64,11 +64,11 @@ class MainPage extends LitElement {
         query: gql`
           query {
             me {
-              id
+              _id
               email
             }
             games {
-              id
+              _id
               name
               notes
               players {
@@ -78,7 +78,7 @@ class MainPage extends LitElement {
               }
             }
             players {
-              id
+              _id
               email
               playingToday
             }
@@ -98,7 +98,7 @@ class MainPage extends LitElement {
         query: gql`
           subscription {
             statusChange {
-              id
+              _id
               email
               playingToday
             }
@@ -115,7 +115,7 @@ class MainPage extends LitElement {
     console.log(event);
     // Find the player in the local of players and change status to match.
     this.players = this.players.map(player => {
-      if (player.id === event.detail.id) {
+      if (player._id === event.detail._id) {
         player.playingToday = event.detail.playingToday;
       }
 
@@ -127,7 +127,7 @@ class MainPage extends LitElement {
       .mutate({
         mutation: gql`
           mutation {
-            playing(id: "${event.detail.id}", playingToday: ${
+            playing(id: "${event.detail._id}", playingToday: ${
           event.detail.playingToday
         }) { playingToday }
         }

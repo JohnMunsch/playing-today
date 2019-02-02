@@ -1,16 +1,8 @@
 const Datastore = require('nedb');
 
 let db = {};
-db.players = new Datastore({ filename: 'players.db', autoload: true });
-db.games = new Datastore({ filename: 'games.db', autoload: true });
-
-function uuidv4() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = (Math.random() * 16) | 0,
-      v = c == 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
+db.players = new Datastore({ filename: 'src/players.db', autoload: true });
+db.games = new Datastore({ filename: 'src/games.db', autoload: true });
 
 const STATUS_CHANGED_TOPIC = 'Status Changed';
 
@@ -19,18 +11,49 @@ module.exports = {
     info: () =>
       `This is the API of a In/Out board for player check in for getting together to play games.`,
     me: () => {
-      return players.find(
-        player => player.email === 'john.munsch@aptitude.com'
-      );
+      return new Promise(function(resolve, reject) {
+        db.players.find({ email: 'john.munsch@aptitude.com' }, function(
+          err,
+          players
+        ) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(players[0]);
+          }
+        });
+      });
     },
-    games: () => games,
-    players: () => players
+    games: () => {
+      return new Promise(function(resolve, reject) {
+        db.games.find({}, function(err, games) {
+          if (err) {
+            reject(err);
+          } else {
+            console.log('games', games);
+            resolve(games);
+          }
+        });
+      });
+    },
+    players: () => {
+      return new Promise(function(resolve, reject) {
+        db.players.find({}, function(err, players) {
+          if (err) {
+            reject(err);
+          } else {
+            console.log('players', players);
+            resolve(players);
+          }
+        });
+      });
+    }
   },
   Mutation: {
     // (id: String!, playingToday: Boolean!): Player!
     playing: (context, args, { pubsub }) => {
       // Find the player in question and set his/her status for gaming today.
-      let player = players.find(player => player.id === args.id);
+      let player = players.find(player => player._id === args._id);
 
       player.playingToday = args.playingToday;
 
@@ -69,7 +92,7 @@ module.exports = {
       let match = null;
 
       games = games.filter(game => {
-        if (game.id === args.id) {
+        if (game._id === args._id) {
           match = game;
           return false;
         } else {
@@ -99,7 +122,7 @@ module.exports = {
       let match = null;
 
       players = players.filter(player => {
-        if (player.id === args.id) {
+        if (player._id === args._id) {
           match = player;
           return false;
         } else {
