@@ -23,7 +23,7 @@ class PlayersList extends LitElement {
   in(e) {
     this.dispatchEvent(
       new CustomEvent('status-changed', {
-        detail: { id: this.user._id, playingToday: true }
+        detail: { _id: this.user._id, playingToday: true }
       })
     );
   }
@@ -31,7 +31,7 @@ class PlayersList extends LitElement {
   out(e) {
     this.dispatchEvent(
       new CustomEvent('status-changed', {
-        detail: { id: this.user._id, playingToday: false }
+        detail: { _id: this.user._id, playingToday: false }
       })
     );
   }

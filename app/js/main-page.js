@@ -106,13 +106,14 @@ class MainPage extends LitElement {
         `
       })
       .subscribe(
-        results => (this.players = results.data.statusChange),
+        results => {
+          this.players = results.data.statusChange;
+        },
         error => console.error(error)
       );
   }
 
   playingStatusChanged(event) {
-    console.log(event);
     // Find the player in the local of players and change status to match.
     this.players = this.players.map(player => {
       if (player._id === event.detail._id) {
@@ -123,17 +124,15 @@ class MainPage extends LitElement {
     });
 
     // Make a mutation request via GraphQL to persist the change.
-    this.client
-      .mutate({
-        mutation: gql`
+    this.client.mutate({
+      mutation: gql`
           mutation {
-            playing(id: "${event.detail._id}", playingToday: ${
-          event.detail.playingToday
-        }) { playingToday }
+            playing(_id: "${event.detail._id}", playingToday: ${
+        event.detail.playingToday
+      }) { playingToday }
         }
         `
-      })
-      .then(results => console.log(results), error => console.error(error));
+    });
   }
 
   signOut(event) {
