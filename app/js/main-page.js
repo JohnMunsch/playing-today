@@ -32,6 +32,8 @@ class MainPage extends LitElement {
     this.games = [];
     this.players = [];
 
+    // Create links to connect to both the conventional URL (for queries and mutations)
+    // and to the websocket connection (for subscriptions).
     const cache = new InMemoryCache();
     const httpLink = new HttpLink({
       uri: 'http://localhost:4000/'
@@ -43,8 +45,8 @@ class MainPage extends LitElement {
       }
     });
 
-    // Using the ability to split links, you can send data to each link
-    // depending on what kind of operation is being sent.
+    // Using the ability to split links, you can send data to each link depending
+    // on what kind of operation is being sent.
     const link = split(
       // Split based on operation type.
       ({ query }) => {
@@ -55,6 +57,7 @@ class MainPage extends LitElement {
       httpLink
     );
 
+    // Create a decorator which will add the token to the header with each request.
     const authLink = setContext((_, { headers }) => {
       // Get the authentication token from local storage if it exists
       const token = localStorage.getItem('token');
@@ -73,6 +76,8 @@ class MainPage extends LitElement {
       link: authLink.concat(link)
     });
 
+    // Now that we've got everything setup, make an initial query to get info about
+    // the user, all games, and all players.
     this.client
       .query({
         query: gql`
@@ -107,6 +112,7 @@ class MainPage extends LitElement {
         this.requestUpdate;
       });
 
+    // And make another request to subscribe to player status changes.
     this.client
       .subscribe({
         query: gql`
@@ -150,6 +156,7 @@ class MainPage extends LitElement {
   }
 
   signOut(event) {
+    // Get rid of any local JSON Web Token to log this user out.
     console.log('signOut');
   }
 
