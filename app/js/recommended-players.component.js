@@ -1,4 +1,4 @@
-import { LitElement, html, svg } from '@polymer/lit-element';
+import { LitElement, html, svg } from 'lit-element';
 import * as d3 from 'd3';
 
 class RecommendedPlayers extends LitElement {

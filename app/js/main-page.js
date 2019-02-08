@@ -7,7 +7,7 @@ import { setContext } from 'apollo-link-context';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 
 import './game-tabs.component';
 import './nav-bar.component';
@@ -157,7 +157,12 @@ class MainPage extends LitElement {
 
   signOut(event) {
     // Get rid of any local JSON Web Token to log this user out.
-    console.log('signOut');
+    localStorage.removeItem('token');
+
+    // Clear all of the local data.
+    this.user = {};
+    this.games = [];
+    this.players = [];
   }
 
   createRenderRoot() {
