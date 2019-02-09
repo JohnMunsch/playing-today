@@ -8,3 +8,5 @@
 {"email":"david.daniels@aptitude.com","playingToday":false,"_id":"tSIVzuKeJ7DIqcxd"}
 {"email":"john.munsch@aptitude.com","playingToday":true,"_id":"vHJyEV4qanNlGipg"}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"email":"casey.robbins@aptitude.com","password":"$2a$10$xEVQtQeDyWKLbukv7NIl9OGVdeL6xk3hMWEdFReyy8VWefABtLR3a","playingToday":false,"_id":"ocnQI01y6mGarsRp"}
+{"email":"casey.robbins@aptitude.com","password":"$2a$10$xEVQtQeDyWKLbukv7NIl9OGVdeL6xk3hMWEdFReyy8VWefABtLR3a","playingToday":true,"_id":"ocnQI01y6mGarsRp"}

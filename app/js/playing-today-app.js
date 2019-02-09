@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit-element';
 
-import MainPage from './main-page.js';
+import MainPage from './main-page.component.js';
+import SignInOrRegisterPage from './sign-in-or-register-page.component.js';
 
 class PlayingTodayApp extends LitElement {
   createRenderRoot() {
@@ -8,8 +9,11 @@ class PlayingTodayApp extends LitElement {
   }
 
   render() {
+    // return html`
+    //   <main-page></main-page>
+    // `;
     return html`
-      <main-page></main-page>
+      <sign-in-or-register-page></sign-in-or-register-page>
     `;
   }
 }
