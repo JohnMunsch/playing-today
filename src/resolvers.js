@@ -1,8 +1,17 @@
 const Datastore = require('nedb');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const util = require('util');
+
+require('dotenv').config({ path: 'variables.env' });
 
 let db = {};
 db.players = new Datastore({ filename: 'src/players.db', autoload: true });
+db.players.ensureIndex({ fieldName: 'email', unique: true }, function(err) {
+  if (err) {
+    throw err;
+  }
+});
 db.games = new Datastore({ filename: 'src/games.db', autoload: true });
 
 const STATUS_CHANGED_TOPIC = 'Status Changed';
@@ -109,12 +118,15 @@ module.exports = {
       });
     },
 
-    // (email: String!): Player!
-    createPlayer: (context, args, { pubsub }) => {
+    // signup(email: String!, password: String!, name: String!): AuthPayload
+    signup: async (context, args, { pubsub }) => {
+      const password = await bcrypt.hash(args.password, 10);
+
       return new Promise((resolve, reject) => {
         db.players.insert(
           {
             email: args.email,
+            password,
             playingToday: false
           },
           (err, newDoc) => {
@@ -125,7 +137,16 @@ module.exports = {
                 let newPlayer = players.find(
                   player => player.email === args.email
                 );
-                resolve(newPlayer);
+
+                const token = jwt.sign(
+                  { _id: newPlayer._id, email: newPlayer.email },
+                  process.env.JWTSECRET
+                );
+
+                resolve({
+                  token,
+                  player: newPlayer
+                });
               });
             }
           }
@@ -134,7 +155,7 @@ module.exports = {
     },
 
     // (_id: String!): Player!
-    deletePlayer: (context, args, { pubsub }) => {
+    leave: (context, args, { pubsub }) => {
       return new Promise((resolve, reject) => {
         db.players.remove({ _id: args._id }, {}, (err, docs) => {
           if (err) {
@@ -144,6 +165,42 @@ module.exports = {
             publishUpdatedPlayers(pubsub);
           }
         });
+      });
+    },
+
+    // login(email: String!, password: String!): AuthPayload
+    login: async (context, args, { pubsub }) => {
+      return new Promise((resolve, reject) => {
+        db.players.find(
+          {
+            email: args.email
+          },
+          async (err, player) => {
+            if (err) {
+              reject(err);
+            } else {
+              player = player[0];
+
+              const valid = await bcrypt.compare(
+                args.password,
+                player.password
+              );
+              if (!valid) {
+                reject(new Error('Invalid password.'));
+              }
+
+              const token = jwt.sign(
+                { _id: player._id, email: player.email },
+                process.env.JWTSECRET
+              );
+
+              resolve({
+                token,
+                player
+              });
+            }
+          }
+        );
       });
     }
   },

@@ -31,9 +31,12 @@
     "apollo-link-context": "^1.0.14",
     "apollo-link-http": "^1.5.9",
     "apollo-link-ws": "^1.0.12",
+    "bcryptjs": "^2.4.3",
     "d3": "^5.8.0",
+    "dotenv": "^6.2.0",
     "graphql-tag": "^2.10.1",
     "graphql-yoga": "^1.17.0",
+    "jsonwebtoken": "^8.4.0",
     "lit-element": "^2.0.1",
     "nedb": "^1.8.0",
     "subscriptions-transport-ws": "^0.9.15"

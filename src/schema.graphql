@@ -6,15 +6,21 @@ type Query {
 }
 
 type Mutation {
+  signup(email: String!, password: String!): AuthPayload
+  leave(_id: String!): Boolean
+  login(email: String!, password: String!): AuthPayload
+
   playing(_id: String!, playingToday: Boolean!): Player!
   reset: Boolean!
-
-  createPlayer(email: String!): Player!
-  deletePlayer(_id: String!): Boolean
 }
 
 type Subscription {
   statusChange: [Player]!
+}
+
+type AuthPayload {
+  token: String
+  player: Player
 }
 
 type Game {
