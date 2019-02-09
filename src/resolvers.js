@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const util = require('util');
 
+const STATUS_CHANGED_TOPIC = 'Status Changed';
+
 require('dotenv').config({ path: 'variables.env' });
 
 let db = {};
@@ -13,8 +15,6 @@ db.players.ensureIndex({ fieldName: 'email', unique: true }, function(err) {
   }
 });
 db.games = new Datastore({ filename: 'src/games.db', autoload: true });
-
-const STATUS_CHANGED_TOPIC = 'Status Changed';
 
 function getUserId(context) {
   const Authorization = context.request.get('Authorization');
@@ -92,22 +92,22 @@ module.exports = {
   },
   Mutation: {
     // (_id: String!, playingToday: Boolean!): Player!
-    playing: (parent, args, { pubsub }) => {
+    playing: (parent, args, context) => {
+      let { _id, email } = getUserId(context);
+
       // Find the player in question and set his/her status for gaming today.
       return new Promise((resolve, reject) => {
         db.players.update(
-          { _id: args._id },
+          { _id },
           { $set: { playingToday: args.playingToday } },
           {},
           (err, docs) => {
             if (err) {
               reject(err);
             } else {
-              publishUpdatedPlayers(pubsub).then(players => {
+              publishUpdatedPlayers(context.pubsub).then(players => {
                 // Make sure we return the player we just updated.
-                let mutatedPlayer = players.find(
-                  player => player._id === args._id
-                );
+                let mutatedPlayer = players.find(player => player._id === _id);
                 resolve(mutatedPlayer);
               });
             }
@@ -116,7 +116,9 @@ module.exports = {
       });
     },
 
-    reset: (parent, args, { pubsub }) => {
+    reset: (parent, args, context) => {
+      let { _id, email } = getUserId(context);
+
       return new Promise((resolve, reject) => {
         db.players.update(
           {},
@@ -128,7 +130,7 @@ module.exports = {
             } else {
               resolve(false);
 
-              publishUpdatedPlayers(pubsub);
+              publishUpdatedPlayers(context.pubsub);
             }
           }
         );
@@ -136,7 +138,7 @@ module.exports = {
     },
 
     // signup(email: String!, password: String!, name: String!): AuthPayload
-    signup: async (context, args, { pubsub }) => {
+    signup: async (parent, args, context) => {
       const password = await bcrypt.hash(args.password, 10);
 
       return new Promise((resolve, reject) => {
@@ -150,7 +152,7 @@ module.exports = {
             if (err) {
               reject(err);
             } else {
-              publishUpdatedPlayers(pubsub).then(players => {
+              publishUpdatedPlayers(context.pubsub).then(players => {
                 let newPlayer = players.find(
                   player => player.email === args.email
                 );
@@ -172,21 +174,23 @@ module.exports = {
     },
 
     // (_id: String!): Player!
-    leave: (context, args, { pubsub }) => {
+    leave: (parent, args, context) => {
+      let { _id, email } = getUserId(context);
+
       return new Promise((resolve, reject) => {
-        db.players.remove({ _id: args._id }, {}, (err, docs) => {
+        db.players.remove({ _id }, {}, (err, docs) => {
           if (err) {
             reject(err);
           } else {
             resolve(true);
-            publishUpdatedPlayers(pubsub);
+            publishUpdatedPlayers(context.pubsub);
           }
         });
       });
     },
 
     // login(email: String!, password: String!): AuthPayload
-    login: async (context, args, { pubsub }) => {
+    login: async (parent, args, context) => {
       return new Promise((resolve, reject) => {
         db.players.find(
           {
@@ -223,8 +227,8 @@ module.exports = {
   },
   Subscription: {
     statusChange: {
-      subscribe: (parent, args, { pubsub }) => {
-        return pubsub.asyncIterator(STATUS_CHANGED_TOPIC);
+      subscribe: (parent, args, context) => {
+        return context.pubsub.asyncIterator(STATUS_CHANGED_TOPIC);
       }
     }
   }
