@@ -63,7 +63,9 @@ module.exports = {
         });
       });
     },
-    games: () => {
+    games: (parent, args, context) => {
+      let { _id, email } = getUserId(context);
+
       return new Promise((resolve, reject) => {
         db.games.find({}, (err, games) => {
           if (err) {
@@ -74,7 +76,9 @@ module.exports = {
         });
       });
     },
-    players: () => {
+    players: (parent, args, context) => {
+      let { _id, email } = getUserId(context);
+
       return new Promise((resolve, reject) => {
         db.players.find({}, (err, players) => {
           if (err) {
