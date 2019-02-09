@@ -16,6 +16,20 @@ db.games = new Datastore({ filename: 'src/games.db', autoload: true });
 
 const STATUS_CHANGED_TOPIC = 'Status Changed';
 
+function getUserId(context) {
+  const Authorization = context.request.get('Authorization');
+
+  if (Authorization) {
+    const token = Authorization.replace('Bearer ', '');
+    const { _id, email } = jwt.verify(token, process.env.JWTSECRET);
+
+    return { _id, email };
+  }
+
+  // There was no authorization or the JSON Web Token would not verify.
+  throw new Error('Not authenticated');
+}
+
 function publishUpdatedPlayers(pubsub) {
   return new Promise((resolve, reject) => {
     db.players.find({}, (err, players) => {
@@ -36,18 +50,17 @@ module.exports = {
   Query: {
     info: () =>
       `This is the API of a In/Out board for player check in for getting together to play games.`,
-    me: () => {
+    me: (parent, args, context) => {
+      let { _id, email } = getUserId(context);
+
       return new Promise((resolve, reject) => {
-        db.players.find(
-          { email: 'john.munsch@aptitude.com' },
-          (err, players) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(players[0]);
-            }
+        db.players.find({ email }, (err, players) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(players[0]);
           }
-        );
+        });
       });
     },
     games: () => {
@@ -75,7 +88,7 @@ module.exports = {
   },
   Mutation: {
     // (_id: String!, playingToday: Boolean!): Player!
-    playing: (context, args, { pubsub }) => {
+    playing: (parent, args, { pubsub }) => {
       // Find the player in question and set his/her status for gaming today.
       return new Promise((resolve, reject) => {
         db.players.update(
