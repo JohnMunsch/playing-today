@@ -6,7 +6,7 @@
     "watch": "webpack -w",
     "build": "webpack --mode=production",
     "start": "webpack-dev-server --open",
-    "server": "nodemon -e js,mjs,json,graphql src/index.js"
+    "server": "nodemon --watch src --ignore '*.db' --ext 'js,mjs,json,graphql' src/index.js"
   },
   "repository": {
     "type": "git",
