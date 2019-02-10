@@ -131,8 +131,9 @@ export default class Model {
   }
 
   signup(email, password) {
-    return this.client.mutate({
-      mutation: gql`
+    return this.client
+      .mutate({
+        mutation: gql`
         mutation {
           signup(email:"${email}", password:"${password}") {
             token
@@ -143,12 +144,18 @@ export default class Model {
             }
           }
         }`
-    });
+      })
+      .then(results => {
+        this.token = results.data.signup.token;
+
+        return results;
+      });
   }
 
   login(email, password) {
-    return this.client.mutate({
-      mutation: gql`
+    return this.client
+      .mutate({
+        mutation: gql`
         mutation {
           login(email:"${email}", password:"${password}") {
             token
@@ -159,7 +166,12 @@ export default class Model {
             }
           }
         }`
-    });
+      })
+      .then(results => {
+        this.token = results.data.login.token;
+
+        return results;
+      });
   }
 
   logout() {

@@ -30,7 +30,6 @@ class SignInOrRegisterPage extends LitElement {
 
     // Perform a signup mutation using GraphQL.
     this.model.signup(this.email, this.password).then(results => {
-      console.log('register', results.data.signup);
       localStorage.setItem('token', results.data.signup.token);
       this.model.init();
     });
@@ -41,7 +40,6 @@ class SignInOrRegisterPage extends LitElement {
 
     // Perform a login mutation using GraphQL.
     this.model.login(this.email, this.password).then(results => {
-      console.log('signin', results.data.login);
       localStorage.setItem('token', results.data.login.token);
       this.model.init();
     });

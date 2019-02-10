@@ -1,4 +1,6 @@
 import { LitElement, html } from 'lit-element';
+import PubSub from 'pubsub-js';
+
 import Model from './model';
 
 import MainPage from './main-page.component.js';
@@ -9,6 +11,10 @@ class PlayingTodayApp extends LitElement {
     super();
 
     this.model = new Model();
+    var token = PubSub.subscribe('Model Changed', (msg, data) => {
+      console.log('PlayingTodayApp');
+      this.requestUpdate();
+    });
   }
 
   createRenderRoot() {
