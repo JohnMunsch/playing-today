@@ -1,24 +1,13 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { WebSocketLink } from 'apollo-link-ws';
-import gql from 'graphql-tag';
-import { setContext } from 'apollo-link-context';
-import { split } from 'apollo-link';
-import { getMainDefinition } from 'apollo-utilities';
-
 import { LitElement, html } from 'lit-element';
 
 import './game-tabs.component';
 import './nav-bar.component';
 import './players-list.component';
 
-function emailSort(a, b) {
-  return a.localeCompare(b);
-}
 class MainPage extends LitElement {
   static get properties() {
     return {
+      model: { type: Object },
       user: { type: Object },
       games: { type: Array },
       players: { type: Array }
@@ -27,142 +16,26 @@ class MainPage extends LitElement {
 
   constructor() {
     super();
+  }
 
-    this.user = {};
-    this.games = [];
-    this.players = [];
+  get user() {
+    return this.model.user;
+  }
 
-    // Create links to connect to both the conventional URL (for queries and mutations)
-    // and to the websocket connection (for subscriptions).
-    const cache = new InMemoryCache();
-    const httpLink = new HttpLink({
-      uri: 'http://localhost:4000/'
-    });
-    const wsLink = new WebSocketLink({
-      uri: `ws://localhost:4000/`,
-      options: {
-        reconnect: true
-      }
-    });
+  get games() {
+    return this.model.games;
+  }
 
-    // Using the ability to split links, you can send data to each link depending
-    // on what kind of operation is being sent.
-    const link = split(
-      // Split based on operation type.
-      ({ query }) => {
-        const { kind, operation } = getMainDefinition(query);
-        return kind === 'OperationDefinition' && operation === 'subscription';
-      },
-      wsLink,
-      httpLink
-    );
-
-    // Create a decorator which will add the token to the header with each request.
-    const authLink = setContext((_, { headers }) => {
-      // Get the authentication token from local storage if it exists
-      const token = localStorage.getItem('token');
-
-      // Return the headers to the context so httpLink can read them.
-      return {
-        headers: {
-          ...headers,
-          authorization: token ? `Bearer ${token}` : ''
-        }
-      };
-    });
-
-    this.client = new ApolloClient({
-      cache,
-      link: authLink.concat(link)
-    });
-
-    // Now that we've got everything setup, make an initial query to get info about
-    // the user, all games, and all players.
-    this.client
-      .query({
-        query: gql`
-          query {
-            me {
-              _id
-              email
-            }
-            games {
-              _id
-              name
-              notes
-              players {
-                num
-                best
-                recommended
-              }
-            }
-            players {
-              _id
-              email
-              playingToday
-            }
-          }
-        `
-      })
-      .then(results => {
-        this.user = results.data.me;
-        this.players = results.data.players;
-        this.games = results.data.games;
-
-        this.requestUpdate;
-      });
-
-    // And make another request to subscribe to player status changes.
-    this.client
-      .subscribe({
-        query: gql`
-          subscription {
-            statusChange {
-              _id
-              email
-              playingToday
-            }
-          }
-        `
-      })
-      .subscribe(
-        results => {
-          this.players = results.data.statusChange;
-        },
-        error => console.error(error)
-      );
+  get players() {
+    return this.model.players;
   }
 
   playingStatusChanged(event) {
-    // Find the player in the local of players and change status to match.
-    this.players = this.players.map(player => {
-      if (player._id === event.detail._id) {
-        player.playingToday = event.detail.playingToday;
-      }
-
-      return player;
-    });
-
-    // Make a mutation request via GraphQL to persist the change.
-    this.client.mutate({
-      mutation: gql`
-          mutation {
-            playing(_id: "${event.detail._id}", playingToday: ${
-        event.detail.playingToday
-      }) { playingToday }
-        }
-        `
-    });
+    this.model.playing(event.detail._id, event.detail.playingToday);
   }
 
   signOut(event) {
-    // Get rid of any local JSON Web Token to log this user out.
-    localStorage.removeItem('token');
-
-    // Clear all of the local data.
-    this.user = {};
-    this.games = [];
-    this.players = [];
+    this.model.logout();
   }
 
   createRenderRoot() {

@@ -137,7 +137,7 @@ module.exports = {
       });
     },
 
-    // signup(email: String!, password: String!, name: String!): AuthPayload
+    // signup(email: String!, password: String!): AuthPayload
     signup: async (parent, args, context) => {
       const password = await bcrypt.hash(args.password, 10);
 
@@ -152,6 +152,7 @@ module.exports = {
             if (err) {
               reject(err);
             } else {
+              console.log(newDoc);
               publishUpdatedPlayers(context.pubsub).then(players => {
                 let newPlayer = players.find(
                   player => player.email === args.email

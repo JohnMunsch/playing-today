@@ -3,6 +3,7 @@ import { LitElement, html } from 'lit-element';
 class SignInOrRegisterPage extends LitElement {
   static get properties() {
     return {
+      model: { type: Object },
       email: { type: String },
       password: { type: String },
       login: { type: Boolean }
@@ -24,15 +25,30 @@ class SignInOrRegisterPage extends LitElement {
     return this;
   }
 
-  register() {
-    console.log('register', this.email, this.password);
+  register(e) {
+    e.preventDefault();
+
+    // Perform a signup mutation using GraphQL.
+    this.model.signup(this.email, this.password).then(results => {
+      console.log('register', results.data.signup);
+      localStorage.setItem('token', results.data.signup.token);
+      this.model.init();
+    });
   }
 
-  signin() {
-    console.log('signin', this.email, this.password);
+  signin(e) {
+    e.preventDefault();
+
+    // Perform a login mutation using GraphQL.
+    this.model.login(this.email, this.password).then(results => {
+      console.log('signin', results.data.login);
+      localStorage.setItem('token', results.data.login.token);
+      this.model.init();
+    });
   }
 
   switch() {
+    console.log('switch');
     this.login = !this.login;
   }
 
