@@ -76,10 +76,6 @@
   text-decoration: none;
 }
 
-#signIn .form .register-form {
-  display: none;
-}
-
 #signIn .container {
   position: relative;
   z-index: 1;
