@@ -51,12 +51,12 @@ class SignInOrRegisterPage extends LitElement {
           <input
             type="text"
             placeholder="Email Address"
-            @input="${e => this.emailChange(e)}"
+            @input="${this.emailChange}"
           />
           <input
             type="password"
             placeholder="Password"
-            @input="${e => this.passwordChange(e)}"
+            @input="${this.passwordChange}"
           />
           <button @click="${this.signin}">
             Sign In
@@ -73,12 +73,12 @@ class SignInOrRegisterPage extends LitElement {
           <input
             type="text"
             placeholder="Email Address"
-            @input="${e => this.emailChange(e)}"
+            @input="${this.emailChange}"
           />
           <input
             type="password"
             placeholder="Password"
-            @input="${e => this.passwordChange(e)}"
+            @input="${this.passwordChange}"
           />
           <button @click="${this.register}">
             Register
