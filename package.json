@@ -39,6 +39,7 @@
     "jsonwebtoken": "^8.4.0",
     "lit-element": "^2.0.1",
     "nedb": "^1.8.0",
+    "pubsub-js": "^1.7.0",
     "subscriptions-transport-ws": "^0.9.15"
   }
 }

@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit-element';
+import PubSub from 'pubsub-js';
 
 import './game-tabs.component';
 import './nav-bar.component';
@@ -16,6 +17,10 @@ class MainPage extends LitElement {
 
   constructor() {
     super();
+
+    var token = PubSub.subscribe('Model Changed', (msg, data) => {
+      this.requestUpdate();
+    });
   }
 
   get user() {

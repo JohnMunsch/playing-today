@@ -7,6 +7,8 @@ import { setContext } from 'apollo-link-context';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 
+import PubSub from 'pubsub-js';
+
 function emailSort(a, b) {
   return a.localeCompare(b);
 }
@@ -102,7 +104,7 @@ export default class Model {
         this.players = results.data.players;
         this.games = results.data.games;
 
-        this.requestUpdate;
+        PubSub.publish('Model Changed', this);
       });
 
     // And make another request to subscribe to player status changes.
@@ -121,6 +123,8 @@ export default class Model {
       .subscribe(
         results => {
           this.players = results.data.statusChange;
+
+          PubSub.publish('Model Changed', this);
         },
         error => console.error(error)
       );
