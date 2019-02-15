@@ -4,7 +4,7 @@
 
 This was written because I: a) wanted it, and b) needed an excuse to try out some tech I hadn't had much time to use. Specifically you'll notice the following.
 
-**JavaScript ES6 (arrow functions, string templates, classes, etc.)** - I don't use TypeScript and I didn't use Babel. \_Note: There is a side effect to this in that IE11 cannot work with the page and frankly, it cannot die soon enough for my taste. Every other modern browser is fine with this code without any special compile/transpile steps.
+**JavaScript ES6 (arrow functions, string templates, classes, etc.)** - I don't use TypeScript and I didn't use Babel. _Note: There is a side effect to this in that IE11 cannot work with the page and frankly, it cannot die soon enough for my taste. Every other modern browser is fine with this code without any special compile/transpile steps._
 
 **LitElement** - I only use Web Components for my widget building, it's way faster than any of the frameworks out there, but you still need some middleware to make it easier to write. I drop in LitElement for that at the moment.
 
