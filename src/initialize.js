@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const Datastore = require('nedb');
 
 let db = {};
@@ -164,49 +165,61 @@ const games = [
 const players = [
   {
     email: 'mike.wartberg@aptitude.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'john.munsch@aptitude.com',
+    password: 'password',
     playingToday: true
   },
   {
     email: 'trang.ngo@aptitude.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'sfisherm@vha.com',
+    password: 'password',
     playingToday: true
   },
   {
     email: 'luis.gomez@aptitude.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'david.daniels@aptitude.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'mike.nguchie@aptitude.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'barry.forrest@vizientinc.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'richard.morgan@aptitude.com',
+    password: 'password',
     playingToday: false
   },
   {
     email: 'kavya.katam@aptitude.com',
+    password: 'password',
     playingToday: false
   }
 ];
 
 // Persist all of the players to one datastore.
-players.forEach(player => {
-  db.players.insert(player, (err, newDoc) => {});
+players.forEach(async player => {
+  const password = await bcrypt.hash(player.password, 10);
+  let newPlayer = Object.assign({}, player, { password });
+  db.players.insert(newPlayer, (err, newDoc) => {});
 });
 
 // And all the games to another datastore.
