@@ -9,5 +9,6 @@ COPY package.json /app
 RUN npm install
 
 COPY src /app/src
+COPY variables.env /app
 
 CMD npm run server
