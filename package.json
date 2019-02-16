@@ -6,7 +6,9 @@
     "watch": "webpack -w",
     "build": "webpack --mode=production",
     "start": "webpack-dev-server --open",
-    "server": "nodemon --watch src --ignore '*.db' --ext 'js,mjs,json,graphql' src/index.js"
+    "server": "nodemon --watch src --ignore '*.db' --ext 'js,mjs,json,graphql' src/index.js",
+    "build-docker": "docker image build -t playing .",
+    "run-docker": "docker container run -it --rm  -p 4000:4000 --name playing playing"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "jsonwebtoken": "^8.4.0",
     "lit-element": "^2.0.1",
     "nedb": "^1.8.0",
+    "nodemon": "^1.18.10",
     "pubsub-js": "^1.7.0",
     "subscriptions-transport-ws": "^0.9.15"
   }
