@@ -12,7 +12,6 @@ class PlayingTodayApp extends LitElement {
 
     this.model = new Model();
     var token = PubSub.subscribe('Model Changed', (msg, data) => {
-      console.log('PlayingTodayApp');
       this.requestUpdate();
     });
   }

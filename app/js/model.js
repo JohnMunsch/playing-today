@@ -130,7 +130,7 @@ export default class Model {
       );
   }
 
-  signup(email, password) {
+  register(email, password) {
     return this.client
       .mutate({
         mutation: gql`
@@ -152,7 +152,7 @@ export default class Model {
       });
   }
 
-  login(email, password) {
+  signIn(email, password) {
     return this.client
       .mutate({
         mutation: gql`
@@ -174,7 +174,7 @@ export default class Model {
       });
   }
 
-  logout() {
+  signOut() {
     // Get rid of any local JSON Web Token to log this user out.
     localStorage.removeItem('token');
 

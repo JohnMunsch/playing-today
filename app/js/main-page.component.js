@@ -40,7 +40,7 @@ class MainPage extends LitElement {
   }
 
   signOut(event) {
-    this.model.logout();
+    this.model.signOut();
   }
 
   createRenderRoot() {

@@ -8,9 +8,7 @@ class NavBar extends LitElement {
   }
 
   signOut() {
-    let signOutEvent = new CustomEvent('sign-out', {
-      detail: { message: 'hello. a load-complete happened.' }
-    });
+    let signOutEvent = new CustomEvent('sign-out');
     this.dispatchEvent(signOutEvent);
   }
 
