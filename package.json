@@ -7,8 +7,12 @@
     "build": "webpack --mode=production",
     "start": "webpack-dev-server --open",
     "server": "nodemon --watch src --ignore '*.db' --ext 'js,mjs,json,graphql' src/index.js",
+
     "build-docker": "docker image build -t playing .",
-    "run-docker": "docker container run -it --rm  -p 4000:4000 --name playing playing"
+    "run-docker": "docker container run -it --rm  -p 4000:4000 --name playing playing",
+
+    "faktory": "docker run --rm -it -p 127.0.0.1:7419:7419 -p 127.0.0.1:7420:7420 contribsys/faktory:latest",
+    "faktory-production": "docker run --rm -it -v faktory-data:/var/lib/faktory -e \"FAKTORY_PASSWORD=some_password\" -p 127.0.0.1:7419:7419 -p 127.0.0.1:7420:7420 contribsys/faktory:latest /faktory -b :7419 -w :7420 -e production"
   },
   "repository": {
     "type": "git",

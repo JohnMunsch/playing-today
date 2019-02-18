@@ -6,8 +6,10 @@ RUN apk add --update git
 WORKDIR /app
 COPY package.json /app
 
-RUN npm install
+# This skips all of the Node packages needed only for development (for example, webpack).
+RUN npm install --production
 
+COPY app /app/app
 COPY src /app/src
 COPY variables.env /app
 
