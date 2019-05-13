@@ -9,3 +9,6 @@
 {"email":"richard.morgan@aptitude.com","password":"$2a$10$IyBujzUMx4z/yP90CEhOYOGF58B3B5.vVGAYvn14Nmek6UpnZw6hq","playingToday":false,"_id":"e8JgPt5kmd81dczb"}
 {"email":"barry.forrest@vizientinc.com","password":"$2a$10$oRmodl7AcE5tyImu8ljW5eSkktgXWABD2XPicgzyXq0oBaXu0/Q.2","playingToday":false,"_id":"jIZEKgMKftSjXS5h"}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"email":"porcupine@aptitude.com","password":"$2a$10$zxqq3PEqwWB6//Lgyy7clOP3/6P4mqWM9LMGLbGEYMjjr4KehEz8O","playingToday":false,"_id":"QR5rninXtmpgcxzC"}
+{"email":"porcupine@aptitude.com","password":"$2a$10$zxqq3PEqwWB6//Lgyy7clOP3/6P4mqWM9LMGLbGEYMjjr4KehEz8O","playingToday":true,"_id":"QR5rninXtmpgcxzC"}
+{"email":"porcupine@aptitude.com","password":"$2a$10$zxqq3PEqwWB6//Lgyy7clOP3/6P4mqWM9LMGLbGEYMjjr4KehEz8O","playingToday":false,"_id":"QR5rninXtmpgcxzC"}

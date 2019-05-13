@@ -143,7 +143,11 @@ export default class Model {
               playingToday
             }
           }
-        }`
+        }`,
+        variables: {
+          email,
+          password
+        }
       })
       .then(results => {
         this.token = results.data.signup.token;
@@ -156,16 +160,20 @@ export default class Model {
     return this.client
       .mutate({
         mutation: gql`
-        mutation {
-          login(email:"${email}", password:"${password}") {
-            token
-            player {
-              _id
-              email
-              playingToday
+          mutation($email: String!, $password: String!) {
+            login(email: $email, password: $password) {
+              token
+              player {
+                _id
+                email
+              }
             }
           }
-        }`
+        `,
+        variables: {
+          email,
+          password
+        }
       })
       .then(results => {
         this.token = results.data.login.token;
