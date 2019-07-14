@@ -45,6 +45,7 @@
     "nedb": "^1.8.0",
     "nodemon": "^1.18.10",
     "pubsub-js": "^1.7.0",
-    "subscriptions-transport-ws": "^0.9.15"
+    "subscriptions-transport-ws": "^0.9.15",
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }
