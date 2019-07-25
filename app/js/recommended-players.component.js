@@ -1,5 +1,6 @@
-import { LitElement, html, svg } from 'lit-element';
-import * as d3 from 'd3';
+import { LitElement, svg } from 'lit-element';
+import { scaleLinear } from 'd3-scale';
+import { select } from 'd3-selection';
 
 class RecommendedPlayers extends LitElement {
   static get properties() {
@@ -13,18 +14,15 @@ class RecommendedPlayers extends LitElement {
       circleHeight = 20;
 
     // Create linear scales for the radius of each circle and for a color range.
-    let radius = d3
-      .scaleLinear()
+    let radius = scaleLinear()
       .domain([0, 100])
       .range([0, 10]);
 
-    let color = d3
-      .scaleLinear()
+    let color = scaleLinear()
       .domain([0, 100])
       .range(['white', 'green']);
 
-    let chart = d3
-      .select(this.getElementsByTagName('svg')[0])
+    let chart = select(this.getElementsByTagName('svg')[0])
       .attr('width', circleWidth * this.players.length)
       .attr('height', 35);
 
