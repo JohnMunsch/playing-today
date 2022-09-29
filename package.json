@@ -36,7 +36,7 @@
     "apollo-link-http": "^1.5.9",
     "apollo-link-ws": "^1.0.12",
     "bcryptjs": "^2.4.3",
-    "d3": "^5.8.0",
+    "d3": "^7.6.1",
     "dotenv": "^6.2.0",
     "graphql-tag": "^2.10.1",
     "graphql-yoga": "^1.17.0",
